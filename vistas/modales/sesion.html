@@ -1,0 +1,33 @@
+<!--Modal para el inicio de sesión del usuario-->
+
+<div id="modal-iniciar-sesion" class="modal fade" role="dialog">
+	
+	<div class="modal-dialog modal-dialog-centered modal-sm">
+		
+		<div class="modal-content"> <!--Contenido-->
+
+			<div class="modal-header justify-content-center"><h5 class="pt-2">¿Nos conocemos? <span style="color: mediumvioletred">;)</span></h5></div> <!--Cabecera-->
+
+			<div class="modal-body"> <!--Cuerpo-->
+				
+				<input class="form-nombre form-control mb-1" type="text" minlength="3" maxlength="25" name="nombre" placeholder="Usuario" required/>
+				<input class="form-contrasena form-control" type="password" minlength="3" maxlength="25" name="contrasena" placeholder="Contraseña" required/>
+				
+				<div class="custom-control custom-checkbox mt-3"> <!--Recordatorio de sesión por un año-->
+					<input type="checkbox" class="custom-control-input" id="recordar" name="recordar">
+					<label class="custom-control-label font-italic" for="recordar">¡Recuérdame!</label>
+				</div>
+
+			</div>
+
+			<div class="modal-footer"> <!--Pie-->
+
+				<button class="iniciar-sesion btn btn-info" type="submit">¡Adelante!</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

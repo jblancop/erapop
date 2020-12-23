@@ -1,0 +1,1 @@
+						<div data-nota="<?=$nota?>" data-numero="<?=$canciones_agrupadas?>"></div> <!--Suministro de datos al histograma-->

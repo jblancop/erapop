@@ -1,0 +1,1 @@
+	  						<option value="<?=$id_autor?>" <?= ($id_autor == $id_autor_fav) ? "selected" : "" ?>><?=$nombre_autor?></option>

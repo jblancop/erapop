@@ -1,0 +1,1 @@
+								<div class="carousel-item <?=($contador == 0) ? ' active' : ''; ?>"> <!--La clase "active" ha de ser añadida a una de las diapositivas (de lo contrario el carrusel no se desplazará) pero sólo a una, por lo que se añade a la inicial (que constituye un lote de 5 canciones), para la cual el contador está a 0-->

@@ -1,0 +1,1 @@
+							<option value="<?=$id_subestilo?>" <?= ($id_subestilo == $id_subestilo_fav) ? "selected" : "" ?>><?=$nombre_subestilo?></option>
