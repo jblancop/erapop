@@ -480,8 +480,8 @@ $(function()
 {
     $('.nombre-usuario').click(function() //Cuando se hace clic en el nombre de usuario
     {
-        var nombreUsuario = $(this).text(); //Captura el nombre
-        var idUsuario = $(this).data('id-usuario'); //Captura también su id inserta en un parámetro HTML de tipo "data" por si posteriormente se quiere enviar un mensaje privado
+        nombreUsuario = $(this).text(); //Captura el nombre
+        idUsuario = $(this).data('id-usuario'); //Captura también su id inserta en un parámetro HTML de tipo "data" por si posteriormente se quiere enviar un mensaje privado
 
         $.ajax( //Hace una petición AJaX para recabar su información personal y mostrarla en el modal
         {
@@ -663,88 +663,198 @@ $(function()
                 swal("Vaya...", "Parece que ha ocurrido un error", "error", {button: false});
             }
         })
+    })
 
-        $('#modal-usuarios').on('click', '.envio-mensaje', function() //Delegación de eventos para el botón de envío
+    $('#modal-usuarios').on('click', '.envio-mensaje', function() //Delegación de eventos para el botón de envío
+    {
+        var texto = $('.caja-modal').val(); //Captura el texto de la caja del modal
+        var idEmisor = $('#id-usuario').text(); //El id del usuario conectado
+        var idReceptor = idUsuario; //El id del usuario al que se envía el mensaje
+
+        if(texto.length < 1) //Da un aviso en caso de que se intente enviar un mensaje vacío
         {
-            var texto = $('.caja-modal').val(); //Captura el texto de la caja del modal
-            var idEmisor = $('#id-usuario').text(); //El id del usuario conectado
-            var idReceptor = idUsuario; //El id del usuario al que se envía el mensaje
-            console.log(`Texto: ${texto}`);
-            console.log(`Emisor: ${idEmisor}`);
-            console.log(`Receptor: ${idReceptor}`);
-            if(texto.length < 1) //Da un aviso en caso de que se intente enviar un mensaje vacío
-            {
-                swal("Vaya...", "Parece que te has olvidado de lo que ibas a escribir... ;P", "warning", {button: false});
+            swal("Vaya...", "Parece que te has olvidado de lo que ibas a escribir... ;P", "warning", {button: false});
 
-                return false;
-            }
-            else
+            return false;
+        }
+        else
+        {
+            $.ajax( //Hace una petición AJaX para insertar el mensaje en la BD
             {
-                $.ajax( //Hace una petición AJaX para insertar el mensaje en la BD
+                type: 'POST', 
+                url: '../ajax_enviar_mensaje.php',
+                data: {id_emisor: idEmisor, id_receptor: idReceptor, texto: texto},
+                success: function(respuesta)
+                {
+                    if(respuesta == 1)
+                    {
+                        $('.caja-modal').val(''); //Borra la caja de texto para evitar comportamientos maliciosos por parte del usuario
+
+                        swal('¡Genial!', `${nombreUsuario} ha recibido el mensaje`, 'success', {button: false});    
+                    } 
+                    else swal('Vaya...', `Algo ha fallado; intenta mensajear a ${nombreUsuario} más tarde...`, "error", {button: false});
+                },
+                error: function() //No funciona
+                {
+                    swal("Vaya...", "Parece que ha ocurrido un error", "error", {button: false});
+                }
+            })
+        }
+    })
+
+    $('#modal-usuarios').on('click', '.borrado-modal', function(/*e*/) //Delegación de eventos para que el botón de borrado creado dinámicamente funcione
+    { 
+        //e.preventDefault(); //Al ser creado dinámicamente, el botón no actúa por defecto
+
+        var cajaTexto = $('.caja-modal'); //Captura la caja de texto
+
+        if(cajaTexto.val().length < 1)
+        {
+            swal("Vaya...", "Parece que no hay nada que borrar... ;P", "warning", {button: false});
+
+            return false;
+        }
+        else
+        {
+            swal //Modal para confirmar el borrado
+            ({
+                title: '¿Quieres borrar tu comentario?',
+                text: 'Si estás seguro, adelante',
+                icon: 'warning',
+                dangerMode: true, //Resalta el botón para conservar la información
+                closeOnClickOutside: false, //No permite cerrar el modal haciendo clic fuera de él
+                buttons: 
+                {
+                    cancel: 
+                    {
+                        text: 'Realmente no',
+                        value: null, //Parámetro que determina si se produce o no el borrado
+                        visible: true,
+                        className: 'btn btn-outline-secondary',
+                        closeModal: true,
+                    },
+                    confirm: 
+                    {
+                        text: 'Lo estoy',
+                        value: true, //Parámetro que determina si se produce o no el borrado
+                        visible: true,
+                        className: 'btn btn-danger',
+                        closeModal: true,
+                    }
+                }
+            }).then(function(value){if(value) cajaTexto.val('');}) //Si value = true se borra la caja de texto
+        } 
+    })
+});
+
+
+/* MENSAJES */
+
+/* Marca como leídos los mensajes privados*/
+
+$(function()
+{
+    $('.mensaje-no-leido').click(function() //Al hacer clic en un mensaje no leído (que tiene la clase "mensaje-no-leido")
+    {
+        var idMensaje = $(this).data('id-mensaje'); //Captura el id del mensaje
+        var elemento = $(this); //Captura el mensaje en sí, para poder acceder a él desde la llamada AJaX
+
+        $.ajax( //Llamada AJaX para actualizar el campo "leido" de la BD de 0 a 1
+        {
+            type: 'POST', url: '../ajax_marcar_leidos.php', data: {id_mensaje: idMensaje},
+            success: function(respuesta) //Si hay respuesta
+            {
+                if(respuesta == 1) elemento.removeClass('mensaje-no-leido').addClass('mensaje-leido'); //Si se produce el UPDATE con éxito, se le cambia la clase al mensaje para que pase de color rojo a azul
+                else swal('Vaya...', 'Sabemos que lo querías marcar como leído, pero algo ha fallado...', 'error', {button: false}); //De lo contrario, se muestra un mensaje de error
+            },
+            error: function() //Si no hay respuesta, se muestra un mensaje de error
+            {
+                swal('Vaya...', 'Sabemos que lo querías marcar como leído, pero algo ha fallado...', 'error', {button: false});
+            }
+        })
+    });
+});
+
+/* Oculta/revela los botones de borrado de los mensajes */
+
+$(function() 
+{
+    $('.mensaje-enviado').mouseenter(function() //Al pasar el ratón por el mensaje, revela el botón
+    {
+        var controlador = $(this).hasClass('eliminado'); //Variable que comprueba si el mensaje tiene la clase eliminado
+
+        if(controlador) false; //Si la tiene, no hace nada
+        else $(this).children('.boton-mensaje').slideDown(50); //Si no la tiene -el mensaje no ha sido eliminado-, despliega el botón
+    })
+
+    $('.mensaje-enviado').mouseleave(function() //Al sacar el ratón del mensaje, lo oculta
+    {
+        $('.boton-mensaje').slideUp(50);
+    })
+});
+
+/* Eliminación de mensajes enviados */
+                                
+$(function() 
+{
+    $('.eliminar-mensaje').click(function(e) //Al hacer clic en el botón de borrado
+    {   
+        e.preventDefault(); //Evita el comportamiento por defecto para que surja Sweet Alert
+
+        var idMensaje = $(this).parent().parent().data('id-mensaje'); //Captura el id del mensaje
+        console.log(idMensaje);
+        swal //Modal para confirmar el borrado
+        ({
+            title: '¿Quieres borrar tu mensaje?',
+            text: 'Si estás seguro, adelante',
+            icon: 'warning',
+            dangerMode: true, //Resalta el botón para conservar la información
+            closeOnClickOutside: false, //No permite cerrar el modal haciendo clic fuera de él
+            buttons: 
+            {
+                cancel: 
+                {
+                    text: 'Realmente no',
+                    value: null, //Parámetro que determina si se produce o no el borrado
+                    visible: true,
+                    className: 'btn btn-outline-secondary',
+                    closeModal: true,
+                },
+                confirm: 
+                {
+                    text: 'Lo estoy',
+                    value: true, //Parámetro que determina si se produce o no el borrado
+                    visible: true,
+                    className: 'btn btn-danger',
+                    closeModal: true,
+                }
+            }
+        }).then(function(value)
+        {
+            if(value) //Si value es true, se hace la petición AJaX para eliminar el mensaje
+            {
+                $.ajax(
                 {
                     type: 'POST', 
-                    url: '../ajax_enviar_mensaje.php',
-                    data: {id_emisor: idEmisor, id_receptor: idReceptor, texto: texto},
+                    url: '../ajax_eliminar_mensaje.php',
+                    data: {id_mensaje: idMensaje},
                     success: function(respuesta)
                     {
-                        if(respuesta == 1)
+                        if(respuesta == 0) swal('Ups...', 'No hemos podido eliminar tu mensaje; prueba otra vez dentro de un rato', 'error', {button: false}); //Si la modificación falla, devuelve un mensaje de error
+                        else if(respuesta == 1) //De lo contrario
                         {
-                            $('.caja-modal').val(''); //Borra la caja de texto para evitar comportamientos maliciosos por parte del usuario
+                            swal('¡Fulminado!', 'Tu mensaje ya es historia... :)', 'success', {button: false}); //Devuelve un mensaje de éxito
 
-                            swal('¡Genial!', `${nombreUsuario} ha recibido el mensaje`, 'success', {button: false});    
-                        } 
-                        else swal('Vaya...', `Algo ha fallado; intenta mensajear a ${nombreUsuario} más tarde...`, "error", {button: false});
+                            $(`[data-id-mensaje=${idMensaje}]`).addClass('eliminado'); //Añade la clase "eliminado" para que el script anterior no muestre más el boton de borrado
+                            $(`[data-id-mensaje=${idMensaje}]`).find('.texto-mensaje').fadeIn(500).html('Has eliminado el mensaje'); //Transforma el texto del mensaje
+                        }
                     },
-                    error: function() //No funciona
+                    error: function()
                     {
-                        swal("Vaya...", "Parece que ha ocurrido un error", "error", {button: false});
+                        swal('Ups...', 'Parece que hay algún error técnico; inténtalo de nuevo más tarde', 'error', {button: false});
                     }
                 })
             }
-        })
-
-        $('#modal-usuarios').on('click', '.borrado-modal', function(/*e*/) //Delegación de eventos para que el botón de borrado creado dinámicamente funcione
-        { 
-            //e.preventDefault(); //Al ser creado dinámicamente, el botón no actúa por defecto
-
-            var cajaTexto = $('.caja-modal'); //Captura la caja de texto
-
-            if(cajaTexto.val().length < 1)
-            {
-                swal("Vaya...", "Parece que no hay nada que borrar... ;P", "warning", {button: false});
-
-                return false;
-            }
-            else
-            {
-                swal //Modal para confirmar el borrado
-                ({
-                    title: '¿Quieres borrar tu comentario?',
-                    text: 'Si estás seguro, adelante',
-                    icon: 'warning',
-                    dangerMode: true, //Resalta el botón para conservar la información
-                    closeOnClickOutside: false, //No permite cerrar el modal haciendo clic fuera de él
-                    buttons: 
-                    {
-                        cancel: 
-                        {
-                            text: 'Realmente no',
-                            value: null, //Parámetro que determina si se produce o no el borrado
-                            visible: true,
-                            className: 'btn btn-outline-secondary',
-                            closeModal: true,
-                        },
-                        confirm: 
-                        {
-                            text: 'Lo estoy',
-                            value: true, //Parámetro que determina si se produce o no el borrado
-                            visible: true,
-                            className: 'btn btn-danger',
-                            closeModal: true,
-                        }
-                    }
-                }).then(function(value){if(value) cajaTexto.val('');}) //Si value = true se borra la caja de texto
-            } 
         })
     })
 });
@@ -1051,16 +1161,16 @@ $(function()
     })
 });
 
-/* Oculta/revela los botones de respuesta, edición y borrado de los comentarios */
+/* Oculta/revela los botones de respuesta y borrado de los comentarios */
 
 $(function() 
 {
-    $('.comentario').mouseenter(function() //Al pasar el ratón por el comentario, revela los
+    $('.comentario').mouseenter(function() //Al pasar el ratón por el comentario, revela los botones
     {
-        var controlador = $(this).hasClass('eliminado');
+        var controlador = $(this).hasClass('eliminado'); //Variable que comprueba si el comentario tiene la clase eliminado
 
-        if(controlador) false; 
-        else $(this).siblings('.botonera-comentarios').slideDown(50);
+        if(controlador) false; //Si la tiene, no hace nada
+        else $(this).siblings('.botonera-comentarios').slideDown(50); //Si no la tiene -el comentario no ha sido eliminado-, despliega el botón
     })
 
     $('.lista-comentarios').mouseleave(function() //Al sacar el ratón del listado de comentarios, los oculta
@@ -1089,13 +1199,6 @@ $(function()
     var usuario = $('.nombre-usuario').text(); //Captura el nombre del usuario
 
     if(usuario.length != 0) $('.lista-comentarios').addClass('py-3').addClass('px-1'); //Si hay algún nombre de usuario (es decir, si su longitud es mayor que 0), añade el formato apropiado
-});
-
-/* Pinta el nombre del Administrador en rojo en los comentarios */
-
-$(function() 
-{
-    $('[data-usuario="Administrador"]').css('color', 'crimson'); //Si es el Administrador, añade el formato apropiado
 });
 
 /* Cambio del puntero del ratón al pasar por el nombre de un usuario */
@@ -1297,7 +1400,7 @@ $(function()
     });
 });
 
-/* Oculta/revela las botoneras */
+/* Oculta/revela las botoneras de décadas/recopilatorios */
 
 $(function() 
 {
@@ -1327,27 +1430,10 @@ $(function()
     });
 });
 
-/* Marca como leídos los mensajes privados*/
+/* Pinta el nombre del Administrador en rojo en los comentarios y los mensajes*/
 
-$(function()
+$(function() 
 {
-    $('.mensaje-no-leido').click(function() //Al hacer clic en un mensaje no leído (que tiene la clase "mensaje-no-leido")
-    {
-        var idMensaje = $(this).data('id-mensaje'); //Captura el id del mensaje
-        var elemento = $(this); //Captura el mensaje en sí, para poder acceder a él desde la llamada AJaX
-
-        $.ajax( //Llamada AJaX para actualizar el campo "leido" de la BD de 0 a 1
-        {
-            type: 'POST', url: '../ajax_marcar_leidos.php', data: {id_mensaje: idMensaje},
-            success: function(respuesta) //Si hay respuesta
-            {
-                if(respuesta == 1) elemento.removeClass('mensaje-no-leido').addClass('mensaje-leido'); //Si se produce el UPDATE con éxito, se le cambia la clase al mensaje para que pase de color rojo a azul
-                else swal('Vaya...', 'Sabemos que lo querías marcar como leído, pero algo ha fallado...', 'error', {button: false}); //De lo contrario, se muestra un mensaje de error
-            },
-            error: function() //Si no hay respuesta, se muestra un mensaje de error
-            {
-                swal('Vaya...', 'Sabemos que lo querías marcar como leído, pero algo ha fallado...', 'error', {button: false});
-            }
-        })
-    });
+    $('[data-usuario="Administrador"]').css('color', 'crimson'); 
+    //Si es el Administrador, añade el formato apropiado
 });

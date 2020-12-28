@@ -275,24 +275,26 @@
 
 			require_once("vistas/usuarios/personal/mensajes/encabezado.php");
 
-			$recibidos = array();
+			$recibidos = array(); 
 			$enviados = array();
 
-			while($fila = $resultados->fetch_object())
+			while($fila = $resultados->fetch_object()) //Se separan los mensajes recibidos de los enviados en dos arrays diferentes
 			{
 				if($fila->receptor == $nombre_usuario) array_push($recibidos, $fila);
 				else array_push($enviados, $fila);
 			}
 
-			foreach($recibidos as $clave => $mensaje)
+			foreach($recibidos as $clave => $mensaje) //Mensajes recibidos
 			{
+				$eliminado = $mensaje->eliminado;
+				$emisor = $mensaje->emisor;
 				$id = $mensaje->id_mensaje;
 				$id_emisor = $mensaje->id_emisor;
-				$emisor = $mensaje->emisor;
+				$leido = $mensaje->leido;
 				$texto = $mensaje->texto;
 				$tiempo_pasado = $mensaje->tiempo_pasado;
-				$eliminado = $mensaje->eliminado;
-				$leido = $mensaje->leido;
+
+				if($eliminado) $texto = "Mensaje eliminado por su autor"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
 
 				require("auxiliares/tiempo_pasado.php"); //Le da un formato apropiado el tiempo transcurrido
 				require("vistas/usuarios/personal/mensajes/recibidos.php");
@@ -300,21 +302,22 @@
 
 			require_once("vistas/usuarios/personal/mensajes/retal.php");
 
-			foreach($enviados as $clave => $mensaje)
+			foreach($enviados as $clave => $mensaje) //Mensajes enviados
 			{
+				$eliminado = $mensaje->eliminado;
 				$id = $mensaje->id_mensaje;
 				$id_receptor = $mensaje->id_receptor;
 				$receptor = $mensaje->receptor;
 				$texto = $mensaje->texto;
 				$tiempo_pasado = $mensaje->tiempo_pasado;
-				$eliminado = $mensaje->eliminado;
+
+				if($eliminado) $texto = "Has eliminado el mensaje"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
 
 				require("auxiliares/tiempo_pasado.php"); //Le da un formato apropiado el tiempo transcurrido
 				require("vistas/usuarios/personal/mensajes/enviados.php");
 			}
 
 			require_once("vistas/modales/perfil.php");  
-
 			require_once("vistas/usuarios/personal/mensajes/pie.php");
 		}
 	}

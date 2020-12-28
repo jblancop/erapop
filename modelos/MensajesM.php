@@ -47,6 +47,22 @@
 			return $consulta;
 		}
 
+		/* "Eliminación" de mensajes */
+
+		function eliminar()
+		{
+			$sql = "UPDATE 
+						mensajes 
+					SET 
+						eliminado = 1 #En realidad no los elimina, sino que los marca para que PHP sepa que no ha de mostrarlos
+					WHERE 
+						id_mensaje = {$this->obtener("id_mensaje")}";
+
+			$consulta = $this->conexion->query($sql);
+
+			return $consulta;
+		}
+
 		/* Método para insertar mensajes privados */
 
  		function insertar() 

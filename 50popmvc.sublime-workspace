@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"fon",
+				"font-size\tproperty"
+			],
+			[
+				"padd",
+				"padding-left\tproperty"
+			],
+			[
+				"tr",
+				"translate()\ttransform"
+			],
+			[
+				"ro",
+				"rotateZ()\ttransform"
+			],
+			[
+				"anim",
+				"animation-timing-function\tproperty"
+			],
+			[
+				"anima",
+				"animation-iteration-count\tproperty"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
 				"curso",
 				"cursor: pointer;\t⟠"
 			],
@@ -36,10 +64,6 @@
 				"text-shadow\tproperty"
 			],
 			[
-				"di",
-				"display\t⟠"
-			],
-			[
 				"c",
 				"css"
 			],
@@ -54,10 +78,6 @@
 			[
 				"h",
 				"height\tproperty"
-			],
-			[
-				"padd",
-				"padding-top\tproperty"
 			],
 			[
 				"mar",
@@ -182,10 +202,6 @@
 			[
 				"margi",
 				"margin-left\tproperty"
-			],
-			[
-				"fon",
-				"font-family\tproperty"
 			],
 			[
 				"Sym",
@@ -456,10 +472,6 @@
 				"titulo_cancion"
 			],
 			[
-				"tr",
-				"translateX()\ttransform"
-			],
-			[
 				"f",
 				"FROM"
 			],
@@ -502,18 +514,6 @@
 			[
 				"bac",
 				"background-color\tproperty"
-			],
-			[
-				"paddi",
-				"padding-bottom\tproperty"
-			],
-			[
-				"sub",
-				"subestilos"
-			],
-			[
-				"ut",
-				"utf8_encode"
 			]
 		]
 	},
@@ -523,16 +523,7 @@
 			"file": "recursos/css/estilos.css",
 			"settings":
 			{
-				"buffer_size": 12036,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "modelos/MensajesM.php",
-			"settings":
-			{
-				"buffer_size": 2921,
+				"buffer_size": 12278,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -541,61 +532,25 @@
 			"file": "controladores/UsuariosC.php",
 			"settings":
 			{
-				"buffer_size": 11410,
+				"buffer_size": 11806,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "vistas/usuarios/personal/mensajes/encabezado.php",
+			"file": "vistas/modales/sesion.html",
 			"settings":
 			{
-				"buffer_size": 287,
+				"buffer_size": 1292,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "vistas/usuarios/personal/mensajes/recibidos.php",
+			"file": "vistas/usuarios/conexion.php",
 			"settings":
 			{
-				"buffer_size": 668,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "vistas/usuarios/personal/mensajes/retal.php",
-			"settings":
-			{
-				"buffer_size": 128,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "vistas/usuarios/personal/mensajes/enviados.php",
-			"settings":
-			{
-				"buffer_size": 281,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "vistas/usuarios/personal/mensajes/pie.php",
-			"settings":
-			{
-				"buffer_size": 376,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "vistas/botones/volver.php",
-			"settings":
-			{
-				"buffer_size": 886,
+				"buffer_size": 709,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -604,16 +559,7 @@
 			"file": "recursos/jquery/scripts.js",
 			"settings":
 			{
-				"buffer_size": 65691,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ajax_marcar_leidos.php",
-			"settings":
-			{
-				"buffer_size": 747,
+				"buffer_size": 69503,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -652,32 +598,32 @@
 	"expanded_folders":
 	[
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/botones",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/decadas",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/general",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/recopilatorios",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal"
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos"
 	],
 	"file_history":
 	[
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/carrusel/controladores.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/acceso.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/encabezado.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/recibidos.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/retal.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/enviados.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/pie.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_eliminar_mensaje.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios/padres.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios/hijos.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios/formulario.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos/MensajesM.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_marcar_leidos.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/botones/volver.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_enviar_mensaje.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/tiempo_pasado.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/registro.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios/hijos.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios/formulario.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/decadas/encabezado.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/encabezado.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/recopilatorios/encabezado.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/recibidos.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/enviados.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/cuerpo_enviados-php.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/acceso.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/RecopilatoriosC.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/conexion.php",
@@ -688,7 +634,6 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/modales/perfil.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/modales/sugerencias.html",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_insertar_comentarios.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/comentarios/padres.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos/UsuariosM.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos/ComentariosM.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos/ModeloBase.php",
@@ -705,7 +650,6 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/GeneralC.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/DecadasC.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/modales/decadas.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/carrusel/controladores.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/carrusel/retal2.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/carrusel/cuerpo.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/carrusel/retal1.php",
@@ -771,7 +715,6 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_votacion.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/entrada_usuarios.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuario_conectado.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/botones/volver.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/sesiones.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/iniciar_sesion.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/esquema/cabecera.html",
@@ -787,13 +730,7 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/.htaccess",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/ajax/registro.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax/registro.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/ajax/registro.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/recursos/jquery/scripts/scripts.js",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/recopilatorios/comentarios.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos/Comentarios.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/registro.html",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/Recopilatorios.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/Decadas.php"
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/ajax/registro.php"
 	],
 	"find":
 	{
@@ -811,6 +748,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"form-nombre",
+			"ancho-min-0px",
+			"ancho",
+			"eliminado",
+			"oculta/",
+			"borrado",
+			"respuesta",
+			"borra",
+			"borrar",
+			"mensajes",
+			"eliminar-comentario",
 			"data",
 			"nombre-usuario",
 			"mensaje",
@@ -902,7 +850,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -911,15 +859,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12036,
+						"buffer_size": 12278,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1903,
-								1903
+								7583,
+								7583
 							]
 						],
 						"settings":
@@ -928,175 +876,91 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1800.0,
+						"translation.y": 7523.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "controladores/UsuariosC.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11806,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11088,
+								11088
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 120.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vistas/modales/sesion.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1292,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								642,
+								658
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "modelos/MensajesM.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2921,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2843,
-								2843
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1926.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "controladores/UsuariosC.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11410,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10615,
-								10615
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 320.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
 					"buffer": 3,
-					"file": "vistas/usuarios/personal/mensajes/encabezado.php",
+					"file": "vistas/usuarios/conexion.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 287,
+						"buffer_size": 709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								114,
-								114
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "vistas/usuarios/personal/mensajes/recibidos.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 668,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								69,
-								79
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "vistas/usuarios/personal/mensajes/retal.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								45,
-								45
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "vistas/usuarios/personal/mensajes/enviados.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 281,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								59,
-								59
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1106,76 +970,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "vistas/usuarios/personal/mensajes/pie.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 376,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								70,
-								70
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "vistas/botones/volver.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								167,
-								167
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
+					"buffer": 4,
 					"file": "recursos/jquery/scripts.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 65691,
+						"buffer_size": 69503,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								35574,
-								35431
+								40838,
+								40838
 							]
 						],
 						"settings":
@@ -1185,38 +993,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 9623.0,
+						"translation.y": 9467.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "ajax_marcar_leidos.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 747,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								445,
-								445
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]

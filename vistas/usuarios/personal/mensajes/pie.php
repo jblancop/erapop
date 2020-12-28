@@ -1,6 +1,6 @@
 				</div> <!--Cierre de la columna de enviados-->
 
-			</section>
+			</section> <!--Cierre de la sección de mensajes-->
 
 			<section class="form-group form-inline justify-content-center mt-5 mb-5"> <!--Botonera-->
 

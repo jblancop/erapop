@@ -48,6 +48,9 @@ body {
 } 
 .ancho-max-formulario {
 	max-width: 512px;
+}
+.ancho-max-mensajes {
+	max-width: 540px;
 } 
 .ancho-max-cabecera {
 	max-width: 576px;
@@ -379,6 +382,25 @@ form small, #form-alta-usuario small {
 } /*Textos aclaratorios en letra pequeña*/
 
 
+/* CONEXIÓN */
+
+#icono-usuario {
+	display: block;
+	position: absolute;
+	transform: translate(8px, 7px);
+}
+#icono-contrasena {
+	display: block;
+	position: absolute;
+	font-size: 1.2em;
+	transform: translate(11px, 7px);
+} /*Iconos del modal de conexión*/
+
+.form-nombre, .form-contrasena {
+	padding-left: 30px;
+}
+
+
 /* PÁGINA PERSONAL */
 
 .boton-controlador {
@@ -440,6 +462,15 @@ form small, #form-alta-usuario small {
 	padding: 20px;
 	margin-bottom: 15px;
 }
+
+.letra-mensajes {
+	font-size: 0.75em;
+	transition: all 0.1s ease;
+}
+.letra-mensajes:hover {
+	font-weight: bold;
+	cursor: pointer;
+} /*Botones de borrado de los comentarios*/
 
 
 /* TOP 15 DÉCADAS */
@@ -524,7 +555,7 @@ form small, #form-alta-usuario small {
 .letra-comentarios:hover {
 	font-weight: bold;
 	cursor: pointer;
-} /*Botones de respuesta, edición y borrado de los comentarios*/
+} /*Botones de respuesta y borrado de los comentarios*/
 
 .pseudo-caja {
 	border-top: hidden;

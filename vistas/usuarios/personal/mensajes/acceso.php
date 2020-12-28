@@ -1,12 +1,12 @@
-				<?php if($numero_mensajes == 0): ?>
+				<?php if($numero_mensajes == 0): ?> <!--Si no hay mensajes-->
 
 					<h4>No tienes mensajes</h4>
 
-				<?php elseif($no_leidos == 0): ?>
+				<?php elseif($no_leidos == 0): ?> <!--Si no hay mensajes no leídos-->
 
 					<h4>No tienes nuevos <a class="usuario-conectado" href="<?=url_base?>usuarios/mensajes">mensajes</a></h4>
 
-				<?php else: ?>
+				<?php else: ?> <!--Si hay mensajes por leer-->
 
 					<h4>Tienes nuevos <a class="usuario-conectado" href="<?=url_base?>usuarios/mensajes">mensajes</a> (<p class="no-leidos"><?=$no_leidos?></p>)</h4>
 
