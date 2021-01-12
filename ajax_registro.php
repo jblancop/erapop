@@ -2,6 +2,8 @@
 
 	/* Script PHP que procesa la petición AJaX de registro de usuarios */
 
+	session_start(); //Al estar fuera del circuito del controlador frontal, a los archivos AJax no les afecta el inicio de sesión del index
+
 	require_once("autocargador.php");
 
 	$usuario = new UsuariosC; //Instancia el controlador de usuarios 

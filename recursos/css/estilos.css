@@ -1,3 +1,12 @@
+/* COLORES */
+
+:root {
+	--color1: pink;
+	--color2: mediumvioletred;
+	--color3: purple;
+}
+
+
 /* FUENTES */
 
 @font-face {
@@ -68,10 +77,6 @@ body {
 	height: 100vh;
 } /*Hace que una caja ocupe el 100 % de la altura de pantalla*/
 
-.swal-modal .swal-text {
-    text-align: center;
-} /*Centra los mensajes de los modales de Sweet Alert*/
-
 
 /* BOTONES */
 
@@ -80,7 +85,7 @@ body {
 	padding: 0;
   	margin: 0;
 	background: none;
-	color: mediumvioletred;
+	color: var(--color2);
 	transition: all 0.1s ease;
 }
 .boton-volver:hover {
@@ -88,7 +93,7 @@ body {
 	transform: scale(1.1, 1.1);
 }
 .boton-volver:active {
-	color: purple;
+	color: var(--color3);
 }
 .boton-volver:focus {
 	outline: none;
@@ -103,10 +108,10 @@ body {
 	transition: all 0.25s ease;
 }
 .boton-enlace:hover {
-	color: mediumvioletred;
+	color: var(--color2);
 }
 .boton-enlace:active {
-	color: purple;
+	color: var(--color3);
 }
 .boton-enlace:focus {
 	outline: none;
@@ -118,11 +123,11 @@ body {
 	transition: all 0.3s ease;
 } 
 .usuario-conectado:hover {
-	color: mediumvioletred !important;
+	color: var(--color2) !important;
 	text-decoration: none;
 }
 .usuario-conectado:active {
-	color: purple !important;
+	color: var(--color3) !important;
 	text-decoration: none;
 } /*Enlace con el nombre del usuario que permite acceder a su página personal*/
 
@@ -130,7 +135,7 @@ body {
 /* MODALES */
 
 .modal-header {
-	background-color: pink;
+	background-color: var(--color1);
 	border: none;
 } /*Cabecera de todos los modales*/
 
@@ -148,6 +153,10 @@ body {
 	font-size: 1.25em;
 } /*Fuente para el modal con el perfil de usuario*/
 
+.swal-modal .swal-text {
+    text-align: center;
+} /*Centra los mensajes de los modales de Sweet Alert*/
+
 
 /* PRESENTACIÓN */
 
@@ -155,8 +164,8 @@ body {
 	font-size: 8em;
 }
 .titulo span {
-	color: mediumvioletred;
-	text-shadow: 3px 3px 10px mediumvioletred;
+	color: var(--color2);
+	text-shadow: 3px 3px 10px var(--color2);
 	animation: sombreado 3250ms linear;
 }
 @keyframes sombreado {
@@ -167,7 +176,7 @@ body {
 		text-shadow: none;
 	}
 	100% {
-		text-shadow: 3px 3px 10px mediumvioletred;
+		text-shadow: 3px 3px 10px var(--color2);
 	}
 } /*Animación para que aparezca el sombreado de "Era Pop"*/
 
@@ -223,11 +232,11 @@ body {
 .numero-top3 {
     position: absolute;
     top: 20px;
-    color: mediumvioletred;
+    color: var(--color2);
 	font-weight: bold;
 	font-size: 75px;
 	font-family: 'Rock Salt', cursive;
-	text-shadow: 5px 5px 4px pink;
+	text-shadow: 5px 5px 4px var(--color1);
 	transition: all 0.25s ease;
 } /*Puesto en la clasificación*/
 
@@ -270,7 +279,7 @@ body {
 	transition: all 0.25s ease;
 }
 .referencia-top3 a:hover {
-	color: pink;
+	color: var(--color1);
 } /*Enlace que redirige a la web de la que se ha tomado la fotografía*/
 
 .texto-top3 {
@@ -281,12 +290,12 @@ body {
     border: 2.5px solid lightblue;
     border-radius: 10px;
     padding: 5px;
-    max-width: 80%;
+    max-width: 87.5%;
     transition: all 1s ease;
 }
 
 .cancion-top3 {
-	color: purple;
+	color: var(--color3);
     font-style: italic;
 	font-weight: bold;
 	font-size: 1.2em;
@@ -311,28 +320,28 @@ body {
 /* ENCABEZADOS */
 
 header {
-	background-color: pink;
+	background-color: var(--color1);
 }
 .violeta-encabezado {
-	color: mediumvioletred;
+	color: var(--color2);
 	transition: all 1s ease;	
 }
 .violeta-encabezado:hover {
-	text-shadow: 4px 2px 5px mediumvioletred;
+	text-shadow: 4px 2px 5px var(--color2);
 } /*Década, año o nombre del usuario; también aplicado a otros textos con clase "display-4" de Bootstrap aunque no sean estrictamente encabezados*/
 
 .enlace-usuario {
-	color: mediumvioletred;
+	color: var(--color2);
 	transition: all 0.1s ease;
 } 
 .enlace-usuario:hover {
 	font-weight: bold;
 	text-decoration: none;
-	color: mediumvioletred;
+	color: var(--color2);
 }
 .enlace-usuario:active {
 	font-weight: bold;
-	color: purple;
+	color: var(--color3);
 } /*Enlace para conectarse o para darse de alta*/
 
 .enlace-mensajes {
@@ -342,11 +351,11 @@ header {
 .enlace-mensajes:hover {
 	font-weight: bold;
 	text-decoration: none;
-	color: mediumvioletred;
+	color: var(--color2);
 }
 .enlace-mensajes:active {
 	font-weight: bold;
-	color: purple;
+	color: var(--color3);
 } /*Enlace para acceder al panel de mensajes*/
 
 .no-leidos {
@@ -361,11 +370,11 @@ header {
 	color: slategray;
 }
 .titulo-registro span {
-	color: mediumvioletred;
+	color: var(--color2);
 	transition: all 1s ease;
 }
 .titulo-registro span:hover {
-	text-shadow: 4px 2px 5px mediumvioletred;
+	text-shadow: 4px 2px 5px var(--color2);
 }
 
 form label, #form-alta-usuario label {
@@ -429,13 +438,13 @@ form small, #form-alta-usuario small {
 } /*Controladores de los carruseles*/
 
 .avisanos{
-	color: mediumvioletred;
+	color: var(--color2);
 	text-decoration: none;
 	transition: all 0.25s ease;
 }
 .avisanos:hover {
 	text-decoration: none;
-	color: purple;
+	color: var(--color3);
 } /*Enlace para enviar un correo*/
 
 
@@ -470,7 +479,7 @@ form small, #form-alta-usuario small {
 .letra-mensajes:hover {
 	font-weight: bold;
 	cursor: pointer;
-} /*Botones de borrado de los comentarios*/
+} /*Botones de borrado de los mensajes*/
 
 
 /* TOP 15 DÉCADAS */
@@ -483,12 +492,12 @@ form small, #form-alta-usuario small {
 	font-family: 'Shadows Into Light', cursive;
 	font-weight: bold;
 	font-size: 2em;
-	color: mediumvioletred;
+	color: var(--color2);
 }
 
 .numero-decada {
 	font-size: 1.75em;
-	text-shadow: 2px 2px 5px purple;
+	text-shadow: 2px 2px 5px var(--color3);
 }
 
 .ancho-100px {
@@ -505,17 +514,17 @@ form small, #form-alta-usuario small {
 /* VÍDEOS */
 
 .numero {
-	color: mediumvioletred;
+	color: var(--color2);
 	font-weight: bold;
 	font-size: 50px;
 	font-family: 'Rock Salt', cursive;
 	padding: 10px;
-	text-shadow: 5px 5px 4px pink;
+	text-shadow: 5px 5px 4px var(--color1);
 	transition: all 0.25s ease;
 } /*Número que indica el puesto de la canción en la clasificación*/
 .numero-grande {
 	font-size: 60px;
-	text-shadow: 5px 5px 14px purple;
+	text-shadow: 5px 5px 14px var(--color3);
 	overflow: visible;
 } /*Aspecto que adquiere gracias al script de jQuery*/
 
@@ -523,7 +532,7 @@ form small, #form-alta-usuario small {
 	transition: all 0.3s ease;
 }
 .cancion-grande {
-	color: purple;
+	color: var(--color3);
 	font-weight: bold;
 	font-size: 1.2em;
 } /*Aspecto que adquiere el título de la canción gracias al script de jQuery*/
@@ -600,7 +609,7 @@ form small, #form-alta-usuario small {
 .nombre-fin {
 	font-family: 'Shadows Into Light', cursive;
 	font-weight: bold;
-	color: mediumvioletred;
+	color: var(--color2);
 } /*Nombre de la web*/
 
 .imagen-fin {
@@ -613,7 +622,7 @@ form small, #form-alta-usuario small {
 
 .nombre-web {
 	font-size: 1.2em;
-	color: mediumvioletred;
+	color: var(--color2);
 }
 
 .enlace-pie {
@@ -626,12 +635,12 @@ form small, #form-alta-usuario small {
 }
 .enlace-pie:hover {
 	text-decoration: none;
-	color: mediumvioletred;
+	color: var(--color2);
 	font-weight: bold;
 	transform: scale(1.1, 1.1);
 }
 .enlace-pie:active {
-	color: purple;
+	color: var(--color3);
 }
 .enlace-pie:focus {
 	outline: none;
@@ -640,10 +649,10 @@ form small, #form-alta-usuario small {
 
 .vinetas {
 	font-family: 'Rock Salt', cursive;
-	color: mediumvioletred;
+	color: var(--color2);
 } /*Numeración del modal con el aviso legal*/
 
 .tachado {
     text-decoration: line-through;
-    color: pink;
+    color: var(--color1);
 }

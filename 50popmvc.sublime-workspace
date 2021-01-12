@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"res",
+				"respuesta"
+			],
+			[
 				"fon",
 				"font-size\tproperty"
 			],
@@ -510,10 +514,6 @@
 			[
 				"vo",
 				"votos_web"
-			],
-			[
-				"bac",
-				"background-color\tproperty"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "recursos/css/estilos.css",
 			"settings":
 			{
-				"buffer_size": 12278,
+				"buffer_size": 12457,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -532,25 +532,34 @@
 			"file": "controladores/UsuariosC.php",
 			"settings":
 			{
-				"buffer_size": 11806,
+				"buffer_size": 12175,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "vistas/modales/sesion.html",
+			"file": "modelos/ModeloBase.php",
 			"settings":
 			{
-				"buffer_size": 1292,
+				"buffer_size": 761,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "vistas/usuarios/conexion.php",
+			"file": "modelos/UsuariosM.php",
 			"settings":
 			{
-				"buffer_size": 709,
+				"buffer_size": 8799,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ajax_registro.php",
+			"settings":
+			{
+				"buffer_size": 406,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -559,7 +568,7 @@
 			"file": "recursos/jquery/scripts.js",
 			"settings":
 			{
-				"buffer_size": 69503,
+				"buffer_size": 69681,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -598,11 +607,16 @@
 	"expanded_folders":
 	[
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/modelos"
 	],
 	"file_history":
 	[
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/galletas.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/conexion.php",
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/modales/sesion.html",
+		"/C/Users/jblanco/Google Drive/Documentos/Tabulae/Varios/Servidores",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/carrusel/controladores.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/acceso.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/encabezado.php",
@@ -626,7 +640,6 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/cuerpo_enviados-php.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/RecopilatoriosC.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/conexion.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/retal.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/nuevos.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/mensajes/no_nuevos.php",
@@ -683,8 +696,6 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/recursos/css/estilos.css",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_iniciar_sesion.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax_insertar_datos_personales.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/modales/sesion.html",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/galletas.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/recursos/jquery/histograma.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/recursos/jquery/advertencia.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/vistas/usuarios/personal/datos_histograma.php",
@@ -729,12 +740,11 @@
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax.php",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/.htaccess",
 		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/controladores/ajax/registro.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax/registro.php",
-		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/auxiliares/ajax/registro.php"
+		"/C/wamp64/www/Recopilatorios/PHP/Web/MVC/ajax/registro.php"
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 46.0
 	},
 	"find_in_files":
 	{
@@ -748,6 +758,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"last",
+			"insert",
+			"INSERT_ID",
+			"lastInsertId",
+			"inserted",
+			"last_",
+			"boton",
+			"purple",
+			"mediumvioletred",
+			"pink",
+			"color",
 			"form-nombre",
 			"ancho-min-0px",
 			"ancho",
@@ -820,6 +841,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"var(--color3)",
+			"var(--color2)",
+			"var(--color1)",
 			"nombre_usuario",
 			"metricas",
 			"$anos_notas",
@@ -850,7 +874,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -859,15 +883,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12278,
+						"buffer_size": 12457,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7583,
-								7583
+								5610,
+								5610
 							]
 						],
 						"settings":
@@ -876,10 +900,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7523.0,
+						"translation.y": 4480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -888,15 +912,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11806,
+						"buffer_size": 12175,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11088,
-								11088
+								2579,
+								2579
 							]
 						],
 						"settings":
@@ -905,48 +929,77 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 120.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "vistas/modales/sesion.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1292,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								642,
-								658
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 840.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "vistas/usuarios/conexion.php",
+					"buffer": 2,
+					"file": "modelos/ModeloBase.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 709,
+						"buffer_size": 761,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								683,
+								683
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "modelos/UsuariosM.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8799,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3192,
+								3192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ajax_registro.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 406,
 						"regions":
 						{
 						},
@@ -959,31 +1012,30 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "recursos/jquery/scripts.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 69503,
+						"buffer_size": 69681,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								40838,
-								40838
+								7143,
+								7143
 							]
 						],
 						"settings":
@@ -992,8 +1044,8 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 9467.0,
+						"translation.x": 449.0,
+						"translation.y": 2923.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,

@@ -32,7 +32,6 @@
 			
 			require_once("recursos/jquery/advertencia.php"); //Y se advierte al usuario
 		}
-
 	}
 	else //En caso de que el usuario no haya pedido que se le recuerde al iniciar sesión
 	{

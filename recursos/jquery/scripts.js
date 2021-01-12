@@ -151,7 +151,12 @@ $(function()
                 data: {nombre: nombre, correo: correo, contrasena: contrasena, contrasena2: contrasena2},
                 success: function(respuesta)
                 {
-                    if(respuesta == 1) swal('¡Bienvenido!', '¡Ya eres uno más de la familia!', 'success', {button: false}).then(function(){formulario.trigger('reset');}); //Se resetea el formulario para evitar que  el usuario se intente registrar de nuevo
+                    if(respuesta == 1) //Si se efectúa el registro con éxito, se redirige al usuario a su perfil personal
+                    {
+                        function perfil(){window.location = 'http://localhost/recopilatorios/php/web/mvc/usuarios/personal';}
+
+                        swal('¡Bienvenido!', '¡Ya eres uno más de la familia!', 'success', {button: false}).then(setTimeout(perfil, 1500));
+                    } 
                     else if(respuesta == 2) swal('Vaya...', 'Nombre repetido; tendrás que elegir uno diferente... ;)', 'info', {button: false});
                     else if(respuesta == 3) swal('Vaya...', 'Correo repetido; tendrás que elegir uno diferente... ;)', 'info', {button: false});
                     else swal('Ups...', 'Algo ha fallado; intenta registrarte de nuevo más tarde...', 'error', {button: false});

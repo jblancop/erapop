@@ -306,8 +306,6 @@
 
 			$sentencia->close();
 
-			$this->conexion->close();
-
 			if($resultado == 1) return 1; //El script de jQuery procesa valores de 1 a 3
 		}
 	}

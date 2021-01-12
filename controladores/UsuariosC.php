@@ -44,6 +44,15 @@
 				{
 					$respuesta = $usuario->registrar(); //Si no están en uso, se procede a su registro
 					
+					if($respuesta == 1) //Si el registro tiene éxito, crea una sesión para el usuario con su id y su nombre
+					{
+						$_SESSION['conectado'] = $nombre;
+
+						$resultados = $usuario->listar("usuarios", NULL, "WHERE nombre_usuario = '$nombre'", "id_usuario");
+
+						while($fila = $resultados->fetch_object()) $_SESSION['id_usuario'] = $fila->id_usuario;
+					} 
+
 					return $respuesta;
 				}
 			}
