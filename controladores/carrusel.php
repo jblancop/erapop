@@ -19,42 +19,47 @@
 	$contador = 0; //Inicia la cuenta de las diapositivas (la primera correspondería a las últimas 5 canciones votadas por el usuario), que dependen del bucle externo; las canciones se cuentan en el bucle interno
 	$romper = false; //Controla si se ha de romper o no el bucle externo
 
-	require("vistas/usuarios/personal/carrusel/encabezado.php");
-
-	foreach($canciones as $clave => $valor) //Bucle externo: cada $valor sería un array con la información de cada canción: (titulo_cancion => "Villa Rosie", ..., ano=> 1993)
+	if($maximo > 0) //Si hay al menos una canción, muestra el carrusel
 	{
-		$clave = $contador * 5; //Las canciones se presentan en lotes (lote como sinónimo de diapositiva) de 5, por lo que en el 1er ciclo del foreach se pintan las canciones que van de la 0 * 5 a la 4, luego las que van de la 1 * 5 a la 9, luego de la 2 * 5 a la 14 y así sucesivamente hasta llegar al final 
+		require("vistas/usuarios/personal/carrusel/encabezado.php");
 
-		require("vistas/usuarios/personal/carrusel/retal1.php");
-
-		for($i = $clave; $i <= $clave + 4; $i++) //Bucle interno: se pintan cada una de las 5 canciones de cada diapositiva: de 0 a 4, luego de 5 a 9, etc.
+		foreach($canciones as $clave => $valor) //Bucle externo: cada $valor sería un array con la información de cada canción: (titulo_cancion => "Villa Rosie", ..., ano=> 1993)
 		{
-			$titulo_cancion = $canciones[$i]->titulo_cancion; //Parámetros obtenidos mediante $carrusel->listar_votadas()
-			$titulo_disco = $canciones[$i]->titulo_disco;
-			$nombre_autor = Utilidades::reordenar($canciones[$i]->nombre_autor);
-			$ano = $canciones[$i]->ano;
+			$clave = $contador * 5; //Las canciones se presentan en lotes (lote como sinónimo de diapositiva) de 5, por lo que en el 1er ciclo del foreach se pintan las canciones que van de la 0 * 5 a la 4, luego las que van de la 1 * 5 a la 9, luego de la 2 * 5 a la 14 y así sucesivamente hasta llegar al final 
 
-			$decada = Utilidades::decada($ano); //Parámetros derivados de transformaciones de los originales de la BD
-			$nombre_foto = Utilidades::recortar($titulo_disco);
+			require("vistas/usuarios/personal/carrusel/retal1.php");
 
-			$recopilatorio = $ano; //El "value" del botón que enlaza al recopilatorio se llama $recopilatorio y no $ano
-	
-			require("vistas/usuarios/personal/carrusel/cuerpo.php");
-
-			if($i == $maximo - 1) //Si se alcanza el final del array de canciones (sizeof() no cuenta desde 0 como $contador sino desde 1, de ahí que se reste 1)
+			for($i = $clave; $i <= $clave + 4; $i++) //Bucle interno: se pintan cada una de las 5 canciones de cada diapositiva: de 0 a 4, luego de 5 a 9, etc.
 			{
-				$romper = true; //Se indica que se ha de romper el bucle externo
-				break; //Se rompe el bucle interno
-			} 
-		}
-		
-		if($romper) break; //Si $romper es verdadero, se rompe el bucle externo
+				$titulo_cancion = $canciones[$i]->titulo_cancion; //Parámetros obtenidos mediante $carrusel->listar_votadas()
+				$titulo_disco = $canciones[$i]->titulo_disco;
+				$nombre_autor = Utilidades::reordenar($canciones[$i]->nombre_autor);
+				$ano = $canciones[$i]->ano;
 
-		$contador++; //Se suma una unidad al contador para que el bucle externo presente la siguiente diapositiva (o lote de 5 canciones)
+				$decada = Utilidades::decada($ano); //Parámetros derivados de transformaciones de los originales de la BD
+				$nombre_foto = Utilidades::recortar($titulo_disco);
+
+				$recopilatorio = $ano; //El "value" del botón que enlaza al recopilatorio se llama $recopilatorio y no $ano
+		
+				require("vistas/usuarios/personal/carrusel/cuerpo.php");
+
+				if($i == $maximo - 1) //Si se alcanza el final del array de canciones (sizeof() no cuenta desde 0 como $contador sino desde 1, de ahí que se reste 1)
+				{
+					$romper = true; //Se indica que se ha de romper el bucle externo
+					break; //Se rompe el bucle interno
+				} 
+			}
 			
-		require("vistas/usuarios/personal/carrusel/retal2.php");
+			if($romper) break; //Si $romper es verdadero, se rompe el bucle externo
+
+			$contador++; //Se suma una unidad al contador para que el bucle externo presente la siguiente diapositiva (o lote de 5 canciones)
+				
+			require("vistas/usuarios/personal/carrusel/retal2.php");
+		}
+
+		require("vistas/usuarios/personal/carrusel/controladores.php");
 	}
 
-	require("vistas/usuarios/personal/carrusel/controladores.php");
+
 
 ?>

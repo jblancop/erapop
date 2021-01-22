@@ -6,21 +6,21 @@
 
 						<h4 class="texto-shadows-slategray pt-3 pb-1">Tus estadísticas</h4> <!--Título-->
 
-						<?php if(!$numero_canciones): ?>
+						<?php if(!$numero_canciones): ?> <!--Si no se ha votado ninguna canción-->
 
 							<h5>No has votado (todavía) ninguna canción</h5>
 
-						<?php else: ?>
+						<?php else: ?> <!--Si se ha votado alguna-->
 
-							<h5>Has votado <span style="color: mediumvioletred"><?=$numero_canciones?></span> <?= ($numero_canciones == 1) ? "canción" : "canciones"; ?> con una <?= ($numero_canciones == 1) ? "nota" : "nota media"; ?> de <span style="color: mediumvioletred"><?= ($numero_canciones == 1) ? $una_nota : $nota_media_global; ?></span> estrellas</h5>
+							<h5>Has votado <span style="color: mediumvioletred"><?=$numero_canciones?></span> <?= ($numero_canciones == 1) ? "canción" : "canciones"; ?> con <span style="color: mediumvioletred"><?=$nota_media_global?></span> estrellas</h5>
 
 						<?php endif; ?>
 
-						<canvas id="histograma" class="animsition"></canvas>
+						<canvas id="histograma" class="animsition"></canvas> <!--Gráfico de barras con las votaciones-->
 
 						<?php require_once("recursos/jquery/histograma.php"); ?>
 
-						<?php if($ano): ?>
+						<?php if($ano): ?> <!--Información de las votaciones por año-->
 
 							<h5>Tu año favorito es <span style="color: mediumvioletred"><?=$ano?></span> con <span style="color: mediumvioletred"><?=$nota_media_anual?></span> estrellas</h5>
 
@@ -30,7 +30,7 @@
 
 						<?php endif; ?>
 
-						<?php if($decada): ?>
+						<?php if($decada): ?> <!--Información de las votaciones por década-->
 
 							<h5 class="pb-3">Tu decada favorita son los <span style="color: mediumvioletred"><?=$decada?></span> con <span style="color: mediumvioletred"><?=$nota_media_decada?></span> estrellas</h5>
 

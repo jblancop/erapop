@@ -8,7 +8,7 @@
 
 			<div class="modal-header encabezado-usuario justify-content-center">
 
-				<h4 class="pt-2" style="color: white;">Perfil de usuario</h4> 
+				<h4 class="pt-2">Perfil de <span style="color: mediumvioletred;">usuario</span></h4> 
 
 			</div>
 

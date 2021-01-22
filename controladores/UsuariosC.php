@@ -144,7 +144,6 @@
 			}
 
 			$nota_media_global = Utilidades::formatear($nota_media_global, 2); //Se formatea apropiadamente la nota media
-			$una_nota = Utilidades::formatear($nota_media_global, 0); //En caso de que sólo se haya votado una canción no se dan decimales
 
 			$resultados = $personal->metricas($notas, "GROUP BY nota"); //En esta ocasión se cuentan las canciones pero agrupándolas por nota (tantas con 5, tantas con 4, etc.) para usarlas en el gráfico de barras
 

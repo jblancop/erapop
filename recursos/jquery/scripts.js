@@ -1243,7 +1243,7 @@ $(function()
             {
                 if(!$.isEmptyObject(respuesta)) //Si el JSON no está vacío, rellena el modal con la lista de canciones
                 {
-                    $('.encabezado-subestilo').children().text('Quizá también te pueda gustar...');
+                    $('.encabezado-subestilo').children().html('Quizá también te pueda <span style="color: mediumvioletred;">gustar</span>...');
                     $('.cuerpo-subestilo').text('');
 
                     for(var i in respuesta) //Para cada índice del JSON, que contiene la información relativa a una de las 5 canciones
@@ -1304,7 +1304,7 @@ $(function()
 
                     var mensaje = $(document.createElement('h6'))
                         .addClass('text-center')
-                        .text('Parece que no tenemos más temazos de ese estilo, ¿por qué no pruebas con otro? ;)')
+                        .html('Parece que no tenemos más <span style="color: mediumvioletred;">temazos</span> de ese estilo, ¿por qué no pruebas con otro? <span style="color: mediumvioletred;">;)</span>')
                         .appendTo('.cuerpo-subestilo');
                 } 
             },
