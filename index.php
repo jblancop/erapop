@@ -17,7 +17,7 @@
 	if($_GET['controlador']) $controlador_c = $_GET['controlador']."C"; //Si en la URL el controlador tiene algún valor, se carga en la variable añadiéndole la C final (todos los controladores vienen identificados a nivel de clase con esa C final)
 	else $controlador_c = controlador_base; //De lo contrario, se usa el controlador por defecto (ver "auxiliares/parametros.php") 
 
-	$controlador = new $controlador_c; //Se crea un objeto a partir de controlador cargado en la variable
+	$controlador = new $controlador_c; //Se crea un objeto a partir del controlador cargado en la variable
 
 	if($_GET['accion']) //Si en la URL la acción -es decir, el método- tiene algún valor
 	{

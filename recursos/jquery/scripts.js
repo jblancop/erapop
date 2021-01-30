@@ -1194,6 +1194,7 @@ $(function()
     {
         $('.formulario-comentarios').addClass('justify-content-end').removeClass('pl-2');
         $('.lista-comentarios').addClass('margen-izq2').removeClass('comentarios-decadas').removeClass('comentarios-decadas2');
+        $('.falso-pie').addClass('mt-4').removeClass('mt-5');
     }
 });
 
@@ -1389,6 +1390,103 @@ $(function()
     $('[data-contador="2"]').css('margin-right', '15px');
     $('[data-contador="12"]').css('margin-right', '15px');
 });
+
+/* Modal con la listas de votación */
+
+/*$(function() 
+{
+    $('.boton-lista').click(function() //Al hacer clic en el botón "¡Recopílame!"
+    {
+        var idCancion = $(this).parent().siblings().find('.cancion').attr('id'); //Captura el id de la canción
+        
+        $.ajax( //Se hace una petición AJaX para saber si el usuario tiene o no listas creadas
+        {
+            type: 'POST', 
+            url: '../ajax_listas.php',
+            dataType: 'json', //Esta vez la información se codifica en un JSON
+            data: {id_cancion: idCancion, nombre_subestilo: nombreSubestilo},
+            success: function(respuesta)
+            {
+                if(!$.isEmptyObject(respuesta)) //Si el JSON no está vacío, rellena el modal con la lista de canciones
+                {
+                    $('.encabezado-subestilo').children().html('Quizá también te pueda <span style="color: mediumvioletred;">gustar</span>...');
+                    $('.cuerpo-subestilo').text('');
+
+                    for(var i in respuesta) //Para cada índice del JSON, que contiene la información relativa a una de las 5 canciones
+                    {
+                        var portada = $(document.createElement('img')) //Dispone apropiadamente todos los elementos
+                        .addClass('mt-1').addClass('mx-2')
+                        .attr('src', respuesta[i].rutaFoto).attr('width', '50').attr('height', '50')
+                        .appendTo('.cuerpo-subestilo');
+
+                        var cancion = $(document.createElement('span'))
+                        .addClass('font-italic')
+                        .text(respuesta[i].tituloCancion)
+                        .appendTo('.cuerpo-subestilo');
+
+                        var de = $(document.createElement('span'))
+                        .text(' de ')
+                        .appendTo('.cuerpo-subestilo');
+
+                        var autor = $(document.createElement('span'))
+                        .addClass('font-weight-bold')
+                        .text(respuesta[i].nombreAutor)
+                        .appendTo('.cuerpo-subestilo');
+
+                        var espacio = $(document.createElement('span'))
+                        .text(' ')
+                        .appendTo('.cuerpo-subestilo');
+
+                        var parentesis1 = $(document.createElement('span'))
+                        .text('(')
+                        .appendTo('.cuerpo-subestilo');
+
+                        var boton = $(document.createElement('button'))
+                        .addClass('boton-enlace')
+                        .attr('role', 'link').attr('name', 'recopilatorio')
+                        .text(respuesta[i].ano)
+                        .val(respuesta[i].ano);
+
+                        var parentesis2 = $(document.createElement('span'))
+                        .addClass('parentesis')
+                        .text(')')
+                        .appendTo(boton);
+
+                        var formulario = $(document.createElement('form'))
+                        .addClass('d-inline')
+                        .attr('method', 'post').attr('action', 'http://localhost/recopilatorios/php/web/mvc/recopilatorios/indice')
+                        .html(boton)
+                        .appendTo('.cuerpo-subestilo');
+
+                        var salto = $(document.createElement('span'))
+                        .html('<br>')
+                        .appendTo('.cuerpo-subestilo');
+                    }
+                }
+                else //Si lo está, muestra un mensaje de advertencia
+                {
+                    $('.encabezado-subestilo').children().text('Vaya...');
+                    $('.cuerpo-subestilo').text('');
+
+                    var mensaje = $(document.createElement('h6'))
+                        .addClass('text-center')
+                        .html('Parece que no tenemos más <span style="color: mediumvioletred;">temazos</span> de ese estilo, ¿por qué no pruebas con otro? <span style="color: mediumvioletred;">;)</span>')
+                        .appendTo('.cuerpo-subestilo');
+                } 
+            },
+            error: function() //En caso de que ocurriese un error al procesar la petición, muestra otro mensaje de advertencia
+            {
+                $('.encabezado-subestilo').children().text('Vaya...');
+                    $('.cuerpo-subestilo').text('');
+
+                var mensaje = $(document.createElement('h6'))
+                    .addClass('text-center')
+                    .text('Parece que ha ocurrido un error... :/')
+                    .appendTo('.cuerpo-subestilo');
+            }
+        })
+    });
+});*/
 
 
 /* VARIOS */

@@ -79,6 +79,48 @@
 			if(!$_SESSION['conectado']) header("Location:".url_base."general/indice");
 			else return true;
 		}
+
+		/* Da formato al tiempo transcurrido desde la creación del comentario o mensajes */
+
+		static function tiempo_pasado($segundos)
+		{
+			if($segundos < 60) $tiempo_formateado = "hace menos de un minuto"; //Hasta un minuto
+			elseif($segundos < 3600) //Hasta una hora
+			{
+				$minutos = floor($segundos/60);
+
+				if($minutos == 1) $tiempo_formateado = "hace un minuto";
+				else $tiempo_formateado = "hace ".$minutos." minutos";
+			}
+			elseif($segundos < 86400) //Hasta un día
+			{
+				$horas = floor($segundos/3600);
+
+				if($horas == 1) $tiempo_formateado = "hace una hora";
+				else $tiempo_formateado = "hace ".$horas." horas";
+			}
+			elseif($segundos < 2629740) //Hasta un mes
+			{
+				$dias = floor($segundos/86400);
+
+				if($dias == 1) $tiempo_formateado = "hace un día";
+				else $tiempo_formateado = "hace ".$dias." días";
+			}
+			else //A partir de un mes
+			{
+				$meses = floor($segundos/2629740);
+
+				if($meses == 1) $tiempo_formateado = "hace un mes";
+				elseif($meses < 12) $tiempo_formateado = "hace ".$meses." meses";
+				elseif($meses < 24) $tiempo_formateado = "hace más de un año";
+				elseif($meses < 36) $tiempo_formateado = "hace más de 2 años";
+				elseif($meses < 48) $tiempo_formateado = "hace más de 3 años";
+				elseif($meses < 60) $tiempo_formateado = "hace más de 4 años";
+				else $tiempo_formateado = "hace más de 5 años";
+			}
+
+			return $tiempo_formateado;
+		}
 	}
 
 ?>

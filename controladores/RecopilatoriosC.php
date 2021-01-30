@@ -5,6 +5,7 @@
 	require_once("modelos/CancionesM.php");
 	require_once("modelos/UsuariosM.php");
 	require_once("modelos/ComentariosM.php");
+	require_once("modelos/ListasM.php");
 
 	class RecopilatoriosC
 	{

@@ -1,4 +1,4 @@
-			<div class="mt-5" style="background-color: pink"> <!--Falso pie que ocupa todo el espacio posible-->
+			<div class="falso-pie mt-5" style="background-color: pink"> <!--Falso pie que ocupa todo el espacio posible-->
 
 			<footer class="container"> <!--Pie de página-->
 

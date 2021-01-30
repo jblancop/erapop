@@ -6,7 +6,7 @@
 
 	class ComentariosM extends ModeloBase
 	{
-		private $decada, $id_usuario, $id_comentario, $id_comentario_padre, $inicio, $texto;
+		private $decada, $id_usuario, $id_comentario, $id_comentario_padre, $inicio, $texto_comentario;
 
 		function __construct() {parent::__construct();}
 
@@ -37,7 +37,7 @@
 						comentarios
 						(
 							id_comentario, 
-							texto, 
+							texto_comentario, 
 							fecha_comentario, 
 							ano, 
 							decada,
@@ -61,7 +61,7 @@
 
 			$sentencia->prepare($sql); //Envía la plantilla de la sentencia a la BD
 
-			$sentencia->bind_param("s", $this->obtener("texto")); //Liga el texto (de tipo cadena, "string") a la sentencia
+			$sentencia->bind_param("s", $this->obtener("texto_comentario")); //Liga el texto (de tipo cadena, "string") a la sentencia
 
 			$resultado = $sentencia->execute(); 
 
@@ -80,7 +80,7 @@
 						id_usuario,
 						eliminado,
 						nombre_usuario, 
-						texto, 
+						texto_comentario, 
 						timestampdiff(second, fecha_comentario, now()) AS tiempo_pasado
 					FROM 
 						comentarios 
@@ -112,7 +112,7 @@
 			$ultima_id = $this->conexion->insert_id; //Se obtiene el id de la última inserción
 
 			$sql = "SELECT 
-						texto, 
+						texto_comentario, 
 						timestampdiff(second, fecha_comentario, now()) AS tiempo_pasado, 
 						nombre_usuario 
 					FROM 

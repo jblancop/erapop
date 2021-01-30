@@ -78,7 +78,7 @@ body {
 } /*Hace que una caja ocupe el 100 % de la altura de pantalla*/
 
 
-/* BOTONES */
+/* BOTONES Y ENLACES */
 
 .boton-volver {
 	border: 0;
@@ -131,6 +131,16 @@ body {
 	text-decoration: none;
 } /*Enlace con el nombre del usuario que permite acceder a su página personal*/
 
+.enlace-subir-bajar {
+	font-weight: bold;
+	color: var(--color2);
+	transition: all 0.3s ease;
+}
+.enlace-subir-bajar:hover {
+	text-decoration: none;
+	color: var(--color3);
+	transform: scale(1.5, 1.5);
+} /*Enlace para desplazarse entre el principio y el final de la página de recopilatorios*/
 
 /* MODALES */
 
@@ -520,7 +530,7 @@ form small, #form-alta-usuario small {
 	font-family: 'Rock Salt', cursive;
 	padding: 10px;
 	text-shadow: 5px 5px 4px var(--color1);
-	transition: all 0.25s ease;
+	transition: all 0.2s ease;
 } /*Número que indica el puesto de la canción en la clasificación*/
 .numero-grande {
 	font-size: 60px;
@@ -529,7 +539,7 @@ form small, #form-alta-usuario small {
 } /*Aspecto que adquiere gracias al script de jQuery*/
 
 .cancion {
-	transition: all 0.3s ease;
+	transition: all 0.2s ease;
 }
 .cancion-grande {
 	color: var(--color3);
@@ -554,6 +564,53 @@ form small, #form-alta-usuario small {
 	padding-bottom: 2.5px;
 } /*Imagen del mundo que acompaña a la localización de la banda*/
 
+.boton-recopilame {
+	color: var(--color1);
+	border: 1px solid;
+	border-radius: 2.5px;
+	border-color: var(--color1);
+	height: 24px;
+	padding: 0px 5px 25px 5px;
+	transition: all 0.5s ease;
+}
+.boton-recopilame:hover {
+	color: white;
+	border-radius: 2.5px;
+	background-color: var(--color2);
+	border-color: var(--color2);
+	height: 24px;
+	padding-top: 0px;
+	cursor: pointer;
+	box-shadow: 0 0 2.5px 2.5px var(--color1);
+	animation: parpadeo 1s infinite linear;
+}
+@keyframes parpadeo {
+	0% {
+		box-shadow: 0 0 2.5px 2.5px var(--color1);
+	}
+	25% {
+		box-shadow: 0 0 2.5px 2.5px var(--color2);
+	}
+	50% {
+		box-shadow: 0 0 2.5px 2.5px var(--color3);
+	}
+	75% {
+		box-shadow: 0 0 2.5px 2.5px var(--color2);
+	}
+	100% {
+		box-shadow: 0 0 2.5px 2.5px var(--color1);
+	}
+} /* Botón para añadir la canción a una lista de reproducción*/
+
+#lista-spotify {
+	background-color: pink;
+}
+
+.boton-lista {
+	cursor: pointer;
+	float: right;
+	margin-top: 3px;
+}
 
 /* COMENTARIOS */
 

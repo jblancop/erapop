@@ -1,1 +1,1 @@
-<button class="btn btn-outline-info btn-sm animsition-link" data-animsition-out-class="flip-out-y" data-animsition-out-duration="500" onclick="window.location='http://localhost/recopilatorios/php/web/mvc/general/indice'">Inicio</button>
+<button class="btn btn-outline-info btn-sm animsition-link" data-animsition-out-class="flip-out-y" data-animsition-out-duration="500" onclick="window.location='<?=url_base?>general/indice'">Inicio</button>

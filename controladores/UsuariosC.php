@@ -10,55 +10,6 @@
 
 	class UsuariosC
 	{
-		/* Gestión del registro de usuarios */
-
-		function registro() 
-		{
-			Utilidades::rechazar_conectado();
-
-			if($_POST) //Si detecta un envío POST procede a registrar al usuario
-			{	
-				foreach($_POST as $clave => $valor) $$clave = $valor;
-
-				$usuario = new UsuariosM; //Se crea un objeto de tipo usuario
-
-				$usuario->establecer("nombre_usuario", $nombre); //Se le asignan sus atributos a partir de las variables POST
-				$usuario->establecer("correo", $correo);
-				$usuario->establecer("contrasena", $contrasena);
-
-				$resultados = $usuario->listar_datos_registro(); //Se obtienen los datos de los usuarios registrados
-
-				while($fila = $resultados->fetch_object()) //Se comprueba si el nombre y el correo ya están en uso
-				{
-					if($usuario->obtener("nombre_usuario") == $fila->nombre_usuario) 
-					{
-						$respuesta = 2;
-						
-						break; //El break es necesario para que dé prioridad a la alerta de nombre repetido sobre la de correo repetido
-					} 
-					elseif($usuario->obtener("correo") == $fila->correo) $respuesta = 3;
-				}
-
-				if($respuesta) return $respuesta; //La respuesta se procesa desde el archivo ajax_insertar_datos_personales.php para evitar problemas con el HTML de la cabecera y el pie
-				else 
-				{
-					$respuesta = $usuario->registrar(); //Si no están en uso, se procede a su registro
-					
-					if($respuesta == 1) //Si el registro tiene éxito, crea una sesión para el usuario con su id y su nombre
-					{
-						$_SESSION['conectado'] = $nombre;
-
-						$resultados = $usuario->listar("usuarios", NULL, "WHERE nombre_usuario = '$nombre'", "id_usuario");
-
-						while($fila = $resultados->fetch_object()) $_SESSION['id_usuario'] = $fila->id_usuario;
-					} 
-
-					return $respuesta;
-				}
-			}
-			else require_once("vistas/usuarios/registro.php"); //Si no hay envío POST, visualiza el formulario de registro 
-		}
-
 		/* Gestión del fin de sesión */
 
 		function desconexion() 
@@ -71,6 +22,75 @@
 			setcookie("id_usuario", false, time() - 1, "/");
 
 			require_once("vistas/usuarios/desconexion.php");
+		}
+
+		/* Gestión de los mensajes privados */
+
+		function mensajes()
+		{
+			Utilidades::rechazar_desconectado();
+			
+			$nombre_usuario = $_SESSION['conectado'];
+			$id_usuario = $_SESSION['id_usuario'];
+
+			$mensajes = new MensajesM; //Creación del objeto a partir del modelo de mensajes
+
+			$mensajes->establecer("id_emisor", $id_usuario); //Caracterización del objeto para que reclame a la BD la información pertinente
+			$mensajes->establecer("id_receptor", $id_usuario);
+
+			$resultados = $mensajes->listar_todo(); //Se listan todos los mensajes enviados y recibidos
+
+			require_once("vistas/usuarios/personal/mensajes/encabezado.php");
+
+			$recibidos = array(); 
+			$enviados = array();
+
+			while($fila = $resultados->fetch_object()) //Se separan los mensajes recibidos de los enviados en dos arrays diferentes
+			{
+				if($fila->receptor == $nombre_usuario) array_push($recibidos, $fila);
+				else array_push($enviados, $fila);
+			}
+
+			foreach($recibidos as $clave => $mensaje) //Mensajes recibidos
+			{
+				$eliminado = $mensaje->eliminado;
+				$emisor = $mensaje->emisor;
+				$id = $mensaje->id_mensaje;
+				$id_emisor = $mensaje->id_emisor;
+				$leido = $mensaje->leido;
+				$texto = $mensaje->texto_mensaje;
+				$tiempo_pasado = Utilidades::tiempo_pasado($mensaje->tiempo_pasado);
+
+				if($eliminado) $texto = "Mensaje eliminado por su autor"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
+
+				require("vistas/usuarios/personal/mensajes/recibidos.php");
+			}
+
+			require_once("vistas/usuarios/personal/mensajes/retal.php");
+
+			foreach($enviados as $clave => $mensaje) //Mensajes enviados
+			{
+				$eliminado = $mensaje->eliminado;
+				$id = $mensaje->id_mensaje;
+				$id_receptor = $mensaje->id_receptor;
+				$receptor = $mensaje->receptor;
+				$texto = $mensaje->texto_mensaje;
+				$tiempo_pasado = Utilidades::tiempo_pasado($mensaje->tiempo_pasado);
+
+				if($eliminado) $texto = "Has eliminado el mensaje"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
+
+				require("vistas/usuarios/personal/mensajes/enviados.php");
+			}
+
+			require_once("vistas/modales/perfil.php");  
+			require_once("vistas/usuarios/personal/mensajes/pie.php");
+		}
+
+		/* Gestión de las listas musicales de los usuarios */
+
+		function listas()
+		{
+			
 		}
 
 		/* Gestión de la página personal */
@@ -265,68 +285,53 @@
 			require_once("vistas/esquema/pie.php");
 		}
 
-		/* Gestión de los mensajes privados */
+		/* Gestión del registro de usuarios */
 
-		function mensajes()
+		function registro() 
 		{
-			Utilidades::rechazar_desconectado();
-			
-			$nombre_usuario = $_SESSION['conectado'];
-			$id_usuario = $_SESSION['id_usuario'];
+			Utilidades::rechazar_conectado();
 
-			$mensajes = new MensajesM; //Creación del objeto a partir del modelo de mensajes
+			if($_POST) //Si detecta un envío POST procede a registrar al usuario
+			{	
+				foreach($_POST as $clave => $valor) $$clave = $valor;
 
-			$mensajes->establecer("id_emisor", $id_usuario); //Caracterización del objeto para que reclame a la BD la información pertinente
-			$mensajes->establecer("id_receptor", $id_usuario);
+				$usuario = new UsuariosM; //Se crea un objeto de tipo usuario
 
-			$resultados = $mensajes->listar_todo(); //Se listan todos los mensajes enviados y recibidos
+				$usuario->establecer("nombre_usuario", $nombre); //Se le asignan sus atributos a partir de las variables POST
+				$usuario->establecer("correo", $correo);
+				$usuario->establecer("contrasena", $contrasena);
 
-			require_once("vistas/usuarios/personal/mensajes/encabezado.php");
+				$resultados = $usuario->listar_datos_registro(); //Se obtienen los datos de los usuarios registrados
 
-			$recibidos = array(); 
-			$enviados = array();
+				while($fila = $resultados->fetch_object()) //Se comprueba si el nombre y el correo ya están en uso
+				{
+					if($usuario->obtener("nombre_usuario") == $fila->nombre_usuario) 
+					{
+						$respuesta = 2;
+						
+						break; //El break es necesario para que dé prioridad a la alerta de nombre repetido sobre la de correo repetido
+					} 
+					elseif($usuario->obtener("correo") == $fila->correo) $respuesta = 3;
+				}
 
-			while($fila = $resultados->fetch_object()) //Se separan los mensajes recibidos de los enviados en dos arrays diferentes
-			{
-				if($fila->receptor == $nombre_usuario) array_push($recibidos, $fila);
-				else array_push($enviados, $fila);
+				if($respuesta) return $respuesta; //La respuesta se procesa desde el archivo ajax_insertar_datos_personales.php para evitar problemas con el HTML de la cabecera y el pie
+				else 
+				{
+					$respuesta = $usuario->registrar(); //Si no están en uso, se procede a su registro
+					
+					if($respuesta == 1) //Si el registro tiene éxito, crea una sesión para el usuario con su id y su nombre
+					{
+						$_SESSION['conectado'] = $nombre;
+
+						$resultados = $usuario->listar("usuarios", NULL, "WHERE nombre_usuario = '$nombre'", "id_usuario");
+
+						while($fila = $resultados->fetch_object()) $_SESSION['id_usuario'] = $fila->id_usuario;
+					} 
+
+					return $respuesta;
+				}
 			}
-
-			foreach($recibidos as $clave => $mensaje) //Mensajes recibidos
-			{
-				$eliminado = $mensaje->eliminado;
-				$emisor = $mensaje->emisor;
-				$id = $mensaje->id_mensaje;
-				$id_emisor = $mensaje->id_emisor;
-				$leido = $mensaje->leido;
-				$texto = $mensaje->texto;
-				$tiempo_pasado = $mensaje->tiempo_pasado;
-
-				if($eliminado) $texto = "Mensaje eliminado por su autor"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
-
-				require("auxiliares/tiempo_pasado.php"); //Le da un formato apropiado el tiempo transcurrido
-				require("vistas/usuarios/personal/mensajes/recibidos.php");
-			}
-
-			require_once("vistas/usuarios/personal/mensajes/retal.php");
-
-			foreach($enviados as $clave => $mensaje) //Mensajes enviados
-			{
-				$eliminado = $mensaje->eliminado;
-				$id = $mensaje->id_mensaje;
-				$id_receptor = $mensaje->id_receptor;
-				$receptor = $mensaje->receptor;
-				$texto = $mensaje->texto;
-				$tiempo_pasado = $mensaje->tiempo_pasado;
-
-				if($eliminado) $texto = "Has eliminado el mensaje"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
-
-				require("auxiliares/tiempo_pasado.php"); //Le da un formato apropiado el tiempo transcurrido
-				require("vistas/usuarios/personal/mensajes/enviados.php");
-			}
-
-			require_once("vistas/modales/perfil.php");  
-			require_once("vistas/usuarios/personal/mensajes/pie.php");
+			else require_once("vistas/usuarios/registro.php"); //Si no hay envío POST, visualiza el formulario de registro 
 		}
 	}
 

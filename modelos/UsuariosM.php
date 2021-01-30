@@ -117,7 +117,7 @@
 					FROM 
 						votan
 							NATURAL JOIN canciones
-								NATURAL JOIN listas
+								NATURAL JOIN listas_spotify
 					WHERE 
 						id_usuario = {$this->obtener('id_usuario')}
 					GROUP BY
@@ -235,7 +235,7 @@
 					FROM 
 						votan
 							NATURAL JOIN canciones
-								NATURAL JOIN listas
+								NATURAL JOIN listas_spotify
 					WHERE 
 						id_usuario = {$this->obtener('id_usuario')}";
 

@@ -49,7 +49,7 @@
 										
 											<?php foreach($subestilos as $clave => $subestilo): ?>
 
-													<span class="boton-subestilo badge badge-info" data-toggle="modal" data-target="#modal-subestilo"><?=$subestilo?></span>
+													<a class="boton-subestilo badge badge-info" data-toggle="modal" data-target="#modal-subestilo"><span style="color: white;"><?=$subestilo?></span></a>
 
 											<?php endforeach; ?>
 
@@ -63,7 +63,7 @@
 
 							</div>
 						  
-							<div class="row mt-1"> <!--Sistema de votación-->
+							<div class="d-flex row mt-1"> <!--Sistema de votación-->
 
 								<span class="estrellas mt-3 ml-2"> <!--Estrellas-->
 
@@ -81,7 +81,15 @@
 
 								<div class="badge badge-pill badge-warning mt-3 ml-2 d-flex align-items-center justify-content-center"><?=$nota_media?></div> <!--Nota media-->
 
-								<div class="mt-3 ml-2"><span class="font-weight-bold"><?=$votos_web?>&nbsp</span><?=$coletilla?></div> <!--Número de votos-->
+								<div class="mt-3 ml-2" style="transform: translateY(2px);"><span class="font-weight-bold"><?=$votos_web?>&nbsp</span><?=$coletilla?></div> <!--Número de votos-->
+
+								<?php if($_SESSION['conectado']): ?> <!--Si el usuario está conectado-->
+
+									<div class="boton-recopilame mt-3 ml-auto" data-toggle="modal" data-target="#modal-listas"><small>¡Recopílame!</small></div> <!--Se muestra el botón para añadir la canción a una lista de reproducción-->
+
+									<?php require_once("vistas/modales/listas.php"); ?>
+
+								<?php endif; ?>
 
 							</div>
 

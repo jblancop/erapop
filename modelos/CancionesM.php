@@ -34,7 +34,7 @@
 						titulo_disco,   
 						votos_web	 
 					FROM 
-						listas 
+						listas_spotify 
 							NATURAL JOIN canciones 
 								NATURAL JOIN discos 
 									NATURAL JOIN publican 
@@ -61,7 +61,7 @@
 			$sql = "SELECT 
 						enlace_spotify 
 					FROM 
-						listas 
+						listas_spotify 
 					WHERE 
 						ano = {$this->obtener('inicio')}";
 
@@ -97,7 +97,7 @@
 						titulo_cancion, 
 						titulo_disco  
 					FROM 
-						listas 
+						listas_spotify 
 							NATURAL JOIN canciones 
 								NATURAL JOIN discos 
 									NATURAL JOIN relacionados 
@@ -126,7 +126,7 @@
 						nombre_autor, 
 						ano  
 					FROM 
-						listas 
+						listas_spotify 
 							NATURAL JOIN canciones  
 								NATURAL JOIN discos 
 									NATURAL JOIN publican 

@@ -48,5 +48,3 @@
 			<section class="h-25"></section> <!--Separador vacío que ocupa el 25 % de la pantalla-->
 
 		</main>
-
-		

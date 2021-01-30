@@ -10,7 +10,7 @@
 
 							<?php endif; ?> <!--En ambos casos, se muestra el tiempo transcurrido desde la publicación del mensaje y el texto de éste-->
 
-								<span>dijo&nbsp</span><?=$tiempo_pasado_form?>:</div>
+								<span>dijo&nbsp</span><?=$tiempo_pasado?>:</div>
 
 								<div class="comentario ml-4 mb-1 font-italic text-break"><?=$texto?></div>
 

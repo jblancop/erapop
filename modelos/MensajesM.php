@@ -6,7 +6,7 @@
 
 	class MensajesM extends ModeloBase
 	{
-		private $id_emisor, $id_receptor, $texto;
+		private $id_emisor, $id_receptor, $texto_mensaje;
 
 		function __construct() {parent::__construct();}
 
@@ -73,7 +73,7 @@
 							id_mensaje,
 							id_emisor,
 							id_receptor, 
-							texto, 
+							texto_mensaje, 
 							fecha_mensaje
 						) 
 					VALUES
@@ -89,7 +89,7 @@
 
 			$sentencia->prepare($sql); //Envía la plantilla de la sentencia a la BD
 
-			$sentencia->bind_param("s", $this->obtener("texto")); //Liga el texto (de tipo cadena, "string") a la sentencia
+			$sentencia->bind_param("s", $this->obtener("texto_mensaje")); //Liga el texto (de tipo cadena, "string") a la sentencia
 
 			$resultado = $sentencia->execute(); //Si la inserción es un éxito devuelve "1"
 
@@ -108,7 +108,7 @@
 						u1.nombre_usuario AS emisor,
 						m.id_receptor,
 					    u2.nombre_usuario AS receptor,
-						m.texto,
+						m.texto_mensaje,
 					    timestampdiff(second, m.fecha_mensaje, now()) AS tiempo_pasado,
 					    m.eliminado,
 					    m.leido

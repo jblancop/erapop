@@ -10,13 +10,11 @@
 
 	array_pop($canciones); //Por alguna razón se crea una fila adicional vacía que hay que eliminar
 
-	if($_SESSION['id_usuario']) //Si hay un usuario conectado, se reclama a la BD la información sobre sus votaciones
+	if($_SESSION['id_usuario']) //Si hay un usuario conectado, se reclama a la BD la información sobre sus votaciones y sus listas de YouTube
 	{
-		$id_usuario = $_SESSION['id_usuario'];
-
 		$usuario = new UsuariosM; //Se crea un objeto de tipo usuario
 
-		$usuario->establecer("id_usuario", $id_usuario); //Caracterización del objeto para que sepa de qué usuario ha de reclamar la información
+		$usuario->establecer("id_usuario", $_SESSION['id_usuario']); //Caracterización del objeto para que sepa de qué usuario ha de reclamar la información
 
 		$resultados = $usuario->listar_notas(); //Reclamación de la información sobre votaciones a la BD
 
@@ -24,13 +22,37 @@
 
 		while($notas[] = $resultados->fetch_object()); //Volcado de la información en el array para no depender de la llamada a la BD
 
-		$provisional = array(); //Array provisional en el que volcar cada $fila de $canciones tras incluirle su votación  
+		$provisional = array(); //Array provisional en el que volcar cada $fila de $canciones tras incluirle su votación
+
+		$listas = new ListasM; //Se crea un objeto de tipo lista
+
+		$listas->establecer("id_usuario", $_SESSION['id_usuario']); //Caracterización del objeto para que sepa de qué usuario ha de reclamar la información
+
+		$resultado = $listas->contar_listas(); //Consulta a la BD sobre cuántas listas tiene el usuario (entre 0 y 3)
+
+		while($fila = $resultado->fetch_object()) $numero_listas = $fila->numero_listas;  
 
 		foreach($canciones as $clave => $fila) 
 		{
-			foreach($notas as $clave2 => $fila2) if($fila->id_cancion == $fila2->id_cancion) $fila->nota = $fila2->nota; //Cada vez que se encuentra una equivalencia entre los id de las canciones, se le agrega la votación que le ha dado el usuario
+			foreach($notas as $clave2 => $fila2)
+			{
+				if($fila->id_cancion == $fila2->id_cancion) $fila->nota = $fila2->nota; //Cada vez que se encuentra una equivalencia entre los id de las canciones, se le agrega la votación que le ha dado el usuario
 
-			array_push($provisional, $fila); //Se construye un array análogo a $canciones pero con un parámetro adicional para las votaciones
+				$fila->numero_listas = $numero_listas; //Se añade también el número de listas como atributo
+
+				if($numero_listas > 0) //Si el usuario ha hecho alguna lista
+				{
+					$datos_listas = array(); //Se crea un array para almacenar la información sobre las listas (id, nombre, número de canciones y tiempo desde la última inclusión)
+
+					$resultados = $listas->informacion_modal(); //Se consulta a la BD qué listas ha creado el usuario
+
+					while($fila3 = $resultados->fetch_object()) array_push($datos_listas, $fila3); //Se incluyen las listas en el array
+
+					$fila->listas = $datos_listas; //Se añade el array de listas como atributo de cada $fila del array $canciones
+				} 
+			} 
+
+			array_push($provisional, $fila); //Se construye un array análogo a $canciones pero con los parámetros adicionales para las votaciones, número de listas y títulos de las listas (que a su vez es otro array)
 		}
 
 		$canciones = $provisional; //Se sustituye el contenido del array maestro por el de $provisional para poder añadirle más información a $canciones en el siguiente paso
@@ -76,6 +98,10 @@
 
 		$subestilos = array();
 		$subestilos = $fila->subestilos; //Parámetro obtenido mediante $videos->listar_subestilos()
+
+		$numero_listas = $fila->numero_listas; //Parámetros obtenidos a partir del objeto $listas
+		$listas = array();
+		$listas = $fila->listas;
 
 		$coletilla = Utilidades::coletilla($votos_web); //Parámetros derivados de transformaciones de los originales de la BD
 		$decada = Utilidades::decada($ano);

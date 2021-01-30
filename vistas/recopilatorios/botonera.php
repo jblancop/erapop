@@ -38,7 +38,14 @@
 
 			</nav>
 
-			<main class="container mt-3" data-animsition-in-class="zoom-in-sm"> <!--Cuerpo principal de la página de recopilatorios-->
+			<div class="container mt-4 d-flex justify-content-center"> <!--Enlace para ir al final de la página-->
+
+				<a name="arriba"></a>
+				<a href="#abajo" class="enlace-subir-bajar icono">;</a>
+
+			</div>
+
+			<main class="container" data-animsition-in-class="zoom-in-sm"> <!--Cuerpo principal de la página de recopilatorios-->
 
 			<div class="row"> <!--Suple la función "row" que antes hacía el cuerpo-->
 
