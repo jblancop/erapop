@@ -6,6 +6,7 @@
 
 	require_once("modelos/ComentariosM.php");
 	require_once("auxiliares/reinicio.php");
+	require_once("auxiliares/Utilidades.php");
 
 	foreach($_POST as $clave => $valor) $$clave = $valor;
 
@@ -15,7 +16,7 @@
 	$comentario->establecer("decada", $decada);
 	$comentario->establecer("id_comentario_padre", $id_comentario_padre);
 	$comentario->establecer("id_usuario", $_SESSION['id_usuario']);
-	$comentario->establecer("texto", $texto);
+	$comentario->establecer("texto_comentario", $texto_comentario);
 	
 	$resultado = $comentario->insertar();
 
@@ -27,12 +28,10 @@
 		while($fila = $resultados->fetch_object())
 		{
 			$nombre = $fila->nombre_usuario;
-			$tiempo_pasado = $fila->tiempo_pasado;
-			$texto = $fila->texto;
+			$tiempo_pasado = Utilidades::tiempo_pasado($fila->tiempo_pasado);
+			$texto = $fila->texto_comentario;
 
-			require("auxiliares/tiempo_pasado.php");
-
-			$json = array("nombre" => $nombre, "tiempoPasado" => $tiempo_pasado_form, "texto" => $texto);
+			$json = array("nombre" => $nombre, "tiempoPasado" => $tiempo_pasado, "texto" => $texto);
 		}
 
 		echo json_encode($json);

@@ -28,7 +28,7 @@
 
 		$listas->establecer("id_usuario", $_SESSION['id_usuario']); //Caracterización del objeto para que sepa de qué usuario ha de reclamar la información
 
-		$resultado = $listas->contar_listas(); //Consulta a la BD sobre cuántas listas tiene el usuario (entre 0 y 3)
+		$resultado = $listas->contar(); //Consulta a la BD sobre cuántas listas tiene el usuario (entre 0 y 3)
 
 		while($fila = $resultado->fetch_object()) $numero_listas = $fila->numero_listas;  
 
@@ -47,6 +47,8 @@
 					$resultados = $listas->informacion_modal(); //Se consulta a la BD qué listas ha creado el usuario
 
 					while($fila3 = $resultados->fetch_object()) array_push($datos_listas, $fila3); //Se incluyen las listas en el array
+					
+					foreach($datos_listas as $clave4 => $fila4)	$fila4->id_cancion = $fila->id_cancion; //Se incluye id_cancion en cada lista para facilitar su acceso con jQuery
 
 					$fila->listas = $datos_listas; //Se añade el array de listas como atributo de cada $fila del array $canciones
 				} 

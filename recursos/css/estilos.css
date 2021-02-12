@@ -139,7 +139,6 @@ body {
 .enlace-subir-bajar:hover {
 	text-decoration: none;
 	color: var(--color3);
-	transform: scale(1.5, 1.5);
 } /*Enlace para desplazarse entre el principio y el final de la página de recopilatorios*/
 
 /* MODALES */
@@ -606,7 +605,7 @@ form small, #form-alta-usuario small {
 	background-color: pink;
 }
 
-.boton-lista {
+.agregar-cancion {
 	cursor: pointer;
 	float: right;
 	margin-top: 3px;

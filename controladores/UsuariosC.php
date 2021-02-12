@@ -5,6 +5,7 @@
 	require_once("modelos/UsuariosM.php");
 	require_once("modelos/MensajesM.php");
 	require_once("modelos/CancionesM.php");
+	require_once("modelos/ListasM.php");
 	require_once("auxiliares/Utilidades.php");
 	//require_once("auxiliares/parametros.php");
 
@@ -40,7 +41,7 @@
 
 			$resultados = $mensajes->listar_todo(); //Se listan todos los mensajes enviados y recibidos
 
-			require_once("vistas/usuarios/personal/mensajes/encabezado.php");
+			require_once("vistas/usuarios/mensajes/encabezado.php");
 
 			$recibidos = array(); 
 			$enviados = array();
@@ -63,10 +64,10 @@
 
 				if($eliminado) $texto = "Mensaje eliminado por su autor"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
 
-				require("vistas/usuarios/personal/mensajes/recibidos.php");
+				require("vistas/usuarios/mensajes/recibidos.php");
 			}
 
-			require_once("vistas/usuarios/personal/mensajes/retal.php");
+			require_once("vistas/usuarios/mensajes/retal.php");
 
 			foreach($enviados as $clave => $mensaje) //Mensajes enviados
 			{
@@ -79,18 +80,38 @@
 
 				if($eliminado) $texto = "Has eliminado el mensaje"; //En caso de que el mensaje esté marcado como eliminado, se sustituye el texto
 
-				require("vistas/usuarios/personal/mensajes/enviados.php");
+				require("vistas/usuarios/mensajes/enviados.php");
 			}
 
 			require_once("vistas/modales/perfil.php");  
-			require_once("vistas/usuarios/personal/mensajes/pie.php");
+			require_once("vistas/usuarios/mensajes/pie.php");
 		}
 
 		/* Gestión de las listas musicales de los usuarios */
 
 		function listas()
 		{
-			
+			Utilidades::rechazar_desconectado();
+
+			$id_usuario = $_SESSION['id_usuario']; 
+
+			$listas = new ListasM; //Se crea un objeto de tipo lista
+
+			$listas->establecer("id_usuario", $id_usuario); //Caracterización del objeto para que sepa de qué usuario ha de reclamar la información
+
+			$resultado = $listas->contar(); //Consulta a la BD sobre cuántas listas tiene el usuario (entre 0 y 3)
+
+			while($fila = $resultado->fetch_object()) $numero_listas = $fila->numero_listas;
+
+			if($numero_listas == 0) //Si no hay listas creadas
+			{
+				require_once("vistas/usuarios/listas/sin_listas.php"); //Le ofrece al usuario la posibilidad de crear una
+				require_once("vistas/modales/listas/crear_lista.php");
+			}  
+			else //De lo contrario, presenta el panel de gestión de los recopilatorios
+			{
+				
+			}
 		}
 
 		/* Gestión de la página personal */
@@ -119,7 +140,7 @@
 
 			while($fila = $resultados->fetch_object()) $no_leidos = $fila->no_leidos; //Número total de mensajes no leídos en su bandeja de entrada
 
-			require_once("vistas/usuarios/personal/mensajes/acceso.php");
+			require_once("vistas/usuarios/mensajes/acceso.php");
 
 			/* Carruseles */
 

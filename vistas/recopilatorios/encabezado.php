@@ -1,4 +1,4 @@
-		<div class="animsition"> <!--Inicio de la vista de la página de recopilatorios-->
+		<div class="animsition" data-animsition-in-class="fade-in-down-sm"> <!--Inicio de la vista de la página de recopilatorios-->
 
 			<div style="background-color: pink"> <!--Falsa cabecera que ocupa todo el ancho posible-->
 

@@ -85,9 +85,9 @@
 
 								<?php if($_SESSION['conectado']): ?> <!--Si el usuario está conectado-->
 
-									<div class="boton-recopilame mt-3 ml-auto" data-toggle="modal" data-target="#modal-listas"><small>¡Recopílame!</small></div> <!--Se muestra el botón para añadir la canción a una lista de reproducción-->
+									<div class="boton-recopilame mt-3 ml-auto" data-toggle="modal" data-target="#modal-agregar-canciones"><small>¡Recopílame!</small></div> <!--Se muestra el botón para añadir la canción a una lista de reproducción-->
 
-									<?php require_once("vistas/modales/listas.php"); ?>
+									<?php require("vistas/modales/listas/agregar_canciones.php"); ?>
 
 								<?php endif; ?>
 

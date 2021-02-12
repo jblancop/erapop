@@ -11,7 +11,13 @@
 				<div class="nota-top3 oculto"><?=$nota_media?></div>
 
 				<div class="referencia-top3"><a href="<?=$foto_autor?>" target="_blank">&copy;</a></div> 
-				<div class="texto-top3"><span class="cancion-top3"><?=$titulo_cancion?></span> de <span class= "autor-top3"><?=$nombre_autor_orden?></span> <span class="ano-top3">(<button class="boton-enlace" role="link" name="recopilatorio" value="<?=$recopilatorio?>"><?=$ano?></button>)</span></div>
+
+				<div class="texto-top3">
+					<span class="cancion-top3"><?=$titulo_cancion?></span>
+					<span> de </span>  
+					<span class= "autor-top3"><?=$nombre_autor_orden?></span> 
+					<span class="ano-top3">(<button class="boton-enlace" role="link" name="recopilatorio" value="<?=$recopilatorio?>"><?=$ano?></button>)</span>
+				</div>
 									
 			</form>
 

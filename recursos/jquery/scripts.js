@@ -172,7 +172,6 @@ $(function()
             if(nombre.length > 2) swal('Recuerda...', 'Tu contraseña ha de tener al menos tres caracteres', 'info', {button: false});
             else swal('Recuerda...', 'Tu nombre ha de tener al menos tres caracteres', 'info', {button: false});
         }
-
 	});
 });
 
@@ -487,6 +486,11 @@ $(function()
     {
         nombreUsuario = $(this).text(); //Captura el nombre
         idUsuario = $(this).data('id-usuario'); //Captura también su id inserta en un parámetro HTML de tipo "data" por si posteriormente se quiere enviar un mensaje privado
+        
+        nombreURL = window.location.pathname; //Captura la dirección URL
+        controlador = 0;
+
+        if(nombreURL.indexOf('/usuarios/mensajes') !== -1) controlador = 1; //Si la URL contiene '/usuarios/mensajes', activa el controlador
 
         $.ajax( //Hace una petición AJaX para recabar su información personal y mostrarla en el modal
         {
@@ -688,14 +692,27 @@ $(function()
             {
                 type: 'POST', 
                 url: '../ajax_enviar_mensaje.php',
-                data: {id_emisor: idEmisor, id_receptor: idReceptor, texto: texto},
+                data: {id_emisor: idEmisor, id_receptor: idReceptor, texto_mensaje: texto},
                 success: function(respuesta)
                 {
                     if(respuesta == 1)
                     {
                         $('.caja-modal').val(''); //Borra la caja de texto para evitar comportamientos maliciosos por parte del usuario
 
-                        swal('¡Genial!', `${nombreUsuario} ha recibido el mensaje`, 'success', {button: false});    
+                        if(controlador == 1) //Si se trata de la página de mensajes
+                        {
+                            function reinicio(){location.reload();} //Se refresca la página tras 1,5 s para que se vea a continuación el mensaje enviado
+
+                            swal(
+                            {
+                                title:'¡Genial!', 
+                                text: `${nombreUsuario} ha recibido el mensaje`,
+                                icon: 'success',
+                                button: false,
+                                closeOnClickOutside: false, //Se bloquea el modal
+                            }).then(setTimeout(reinicio, 1500));
+                        }
+                        else swal('¡Genial!', `${nombreUsuario} ha recibido el mensaje`, 'success', {button: false}); //De lo contrario no, para evitar que se corte la emisión de un vídeo o de la lista de Spotify
                     } 
                     else swal('Vaya...', `Algo ha fallado; intenta mensajear a ${nombreUsuario} más tarde...`, "error", {button: false});
                 },
@@ -807,7 +824,7 @@ $(function()
         e.preventDefault(); //Evita el comportamiento por defecto para que surja Sweet Alert
 
         var idMensaje = $(this).parent().parent().data('id-mensaje'); //Captura el id del mensaje
-        console.log(idMensaje);
+
         swal //Modal para confirmar el borrado
         ({
             title: '¿Quieres borrar tu mensaje?',
@@ -946,7 +963,7 @@ $(function()
                 type: 'POST', 
                 url: '../ajax_insertar_comentarios.php',
                 dataType: 'json',
-                data: {texto: texto, ano: ano, decada: decada, id_comentario_padre: "NULL"},
+                data: {texto_comentario: texto, ano: ano, decada: decada, id_comentario_padre: "NULL"},
                 success: function(respuesta)
                 {
                     if(respuesta == "0") swal("Ups...", "No hemos podido procesar tu comentario; prueba otra vez dentro de un rato", "error", {button: false});
@@ -1042,7 +1059,7 @@ $(function()
                     type: 'POST', 
                     url: '../ajax_insertar_comentarios.php',
                     dataType: 'json',
-                    data: {texto: texto, ano: "NULL", decada: "NULL", id_comentario_padre: idPadre},
+                    data: {texto_comentario: texto, ano: "NULL", decada: "NULL", id_comentario_padre: idPadre},
                     success: function(respuesta)
                     {
                         if(respuesta == "0") swal("Ups...", "No hemos podido procesar tu comentario; prueba otra vez dentro de un rato", "error", {button: false}); //Si la inserción falla, devuelve un mensaje de error
@@ -1391,102 +1408,62 @@ $(function()
     $('[data-contador="12"]').css('margin-right', '15px');
 });
 
-/* Modal con la listas de votación */
 
-/*$(function() 
+/* LISTAS */
+
+/* Creación */
+
+$(function()
 {
-    $('.boton-lista').click(function() //Al hacer clic en el botón "¡Recopílame!"
+    $('.crear-lista').click(function() //Se activa al hacer clic en el botón de class="crear-lista"
     {
-        var idCancion = $(this).parent().siblings().find('.cancion').attr('id'); //Captura el id de la canción
-        
-        $.ajax( //Se hace una petición AJaX para saber si el usuario tiene o no listas creadas
+        var nombre = $('.nombre-lista').val(); //Se recogen los valores de los campos del formulario
+        var descripcion = $('.descripcion').val();
+
+        if(nombre.length < 3 || descripcion.length < 3) //Da un aviso en caso de que se intente crear un recopilatorio sin nombre o descripción
         {
-            type: 'POST', 
-            url: '../ajax_listas.php',
-            dataType: 'json', //Esta vez la información se codifica en un JSON
-            data: {id_cancion: idCancion, nombre_subestilo: nombreSubestilo},
-            success: function(respuesta)
-            {
-                if(!$.isEmptyObject(respuesta)) //Si el JSON no está vacío, rellena el modal con la lista de canciones
-                {
-                    $('.encabezado-subestilo').children().html('Quizá también te pueda <span style="color: mediumvioletred;">gustar</span>...');
-                    $('.cuerpo-subestilo').text('');
+            swal("Ah, sí...", "Tanto el nombre como la descripción han de tener una longitud de al menos 3 caracteres", "warning", {button: false});
 
-                    for(var i in respuesta) //Para cada índice del JSON, que contiene la información relativa a una de las 5 canciones
+            return false;
+        }
+        else
+        {
+            $.ajax( //Se hace una petición AJaX para crear la lista
+            {
+                type: 'POST', 
+                url: '../ajax_crear_lista.php', 
+                data: {nombre_lista: nombre, descripcion: descripcion},
+                success: function(respuesta)
+                {
+                    if(respuesta == 1) //Si se efectúa el registro con éxito, se refresca la página web
                     {
-                        var portada = $(document.createElement('img')) //Dispone apropiadamente todos los elementos
-                        .addClass('mt-1').addClass('mx-2')
-                        .attr('src', respuesta[i].rutaFoto).attr('width', '50').attr('height', '50')
-                        .appendTo('.cuerpo-subestilo');
+                        function perfil(){window.location = 'http://localhost/recopilatorios/php/web/mvc/usuarios/listas';}
 
-                        var cancion = $(document.createElement('span'))
-                        .addClass('font-italic')
-                        .text(respuesta[i].tituloCancion)
-                        .appendTo('.cuerpo-subestilo');
-
-                        var de = $(document.createElement('span'))
-                        .text(' de ')
-                        .appendTo('.cuerpo-subestilo');
-
-                        var autor = $(document.createElement('span'))
-                        .addClass('font-weight-bold')
-                        .text(respuesta[i].nombreAutor)
-                        .appendTo('.cuerpo-subestilo');
-
-                        var espacio = $(document.createElement('span'))
-                        .text(' ')
-                        .appendTo('.cuerpo-subestilo');
-
-                        var parentesis1 = $(document.createElement('span'))
-                        .text('(')
-                        .appendTo('.cuerpo-subestilo');
-
-                        var boton = $(document.createElement('button'))
-                        .addClass('boton-enlace')
-                        .attr('role', 'link').attr('name', 'recopilatorio')
-                        .text(respuesta[i].ano)
-                        .val(respuesta[i].ano);
-
-                        var parentesis2 = $(document.createElement('span'))
-                        .addClass('parentesis')
-                        .text(')')
-                        .appendTo(boton);
-
-                        var formulario = $(document.createElement('form'))
-                        .addClass('d-inline')
-                        .attr('method', 'post').attr('action', 'http://localhost/recopilatorios/php/web/mvc/recopilatorios/indice')
-                        .html(boton)
-                        .appendTo('.cuerpo-subestilo');
-
-                        var salto = $(document.createElement('span'))
-                        .html('<br>')
-                        .appendTo('.cuerpo-subestilo');
-                    }
-                }
-                else //Si lo está, muestra un mensaje de advertencia
+                        swal('¡Genial!', 'Tu lista está lista... ;P', 'success', {button: false}).then(setTimeout(perfil, 1500));
+                    } 
+                    else swal('Ups...', 'Algo ha fallado; intenta crear tu recopilatorio más tarde...', 'error', {button: false});
+                },
+                error: function()
                 {
-                    $('.encabezado-subestilo').children().text('Vaya...');
-                    $('.cuerpo-subestilo').text('');
-
-                    var mensaje = $(document.createElement('h6'))
-                        .addClass('text-center')
-                        .html('Parece que no tenemos más <span style="color: mediumvioletred;">temazos</span> de ese estilo, ¿por qué no pruebas con otro? <span style="color: mediumvioletred;">;)</span>')
-                        .appendTo('.cuerpo-subestilo');
-                } 
-            },
-            error: function() //En caso de que ocurriese un error al procesar la petición, muestra otro mensaje de advertencia
-            {
-                $('.encabezado-subestilo').children().text('Vaya...');
-                    $('.cuerpo-subestilo').text('');
-
-                var mensaje = $(document.createElement('h6'))
-                    .addClass('text-center')
-                    .text('Parece que ha ocurrido un error... :/')
-                    .appendTo('.cuerpo-subestilo');
-            }
-        })
+                    swal('Ups...', 'Algo ha fallado; intenta crear tu recopilatorio más tarde...', 'error', {button: false});
+                }
+            });
+        }
     });
-});*/
+});
+
+/* Agregar canciones a los recopilatorios */
+
+$(function()
+{
+    $('.agregar-cancion').click(function()
+    {
+        var idLista = $(this).next().text();
+        console.log(idLista);
+        var idCancion = $(this).next().next().text();
+        console.log(idCancion);
+    });
+});
 
 
 /* VARIOS */

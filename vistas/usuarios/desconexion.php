@@ -15,7 +15,6 @@
 						<h1 class="text-center"><span class="badge badge-info mb-3">Tu sesión se ha cerrado correctamente</span></h1>
 
 					<?php endif; ?>
-					
 
 					<div class="text-center">
 

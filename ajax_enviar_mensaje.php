@@ -12,7 +12,7 @@
 
 	$mensaje->establecer("id_emisor", $id_emisor); //Caracterización del objeto para que pueda insertar el mensaje en la BD
 	$mensaje->establecer("id_receptor", $id_receptor);
-	$mensaje->establecer("texto", $texto);
+	$mensaje->establecer("texto_mensaje", $texto_mensaje);
 	
 	$resultado = $mensaje->insertar();
 

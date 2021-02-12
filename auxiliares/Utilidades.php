@@ -80,7 +80,7 @@
 			else return true;
 		}
 
-		/* Da formato al tiempo transcurrido desde la creación del comentario o mensajes */
+		/* Da formato al tiempo transcurrido */
 
 		static function tiempo_pasado($segundos)
 		{

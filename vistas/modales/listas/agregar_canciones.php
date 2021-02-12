@@ -1,6 +1,6 @@
 <!--Modal para mostrar las listas personales del usuario y acceder a ellas-->
 
-<div id="modal-listas" class="modal fade" role="dialog">
+<div id="modal-agregar-canciones" class="modal fade" role="dialog">
 
 	<?php if($numero_listas == 0): ?> <!--En caso de que el usuario aún no haya hecho ninguna lista, el modal es de tamaño normal-->
 
@@ -24,7 +24,7 @@
 
 					<?php else: ?>
 
-						<ol class="list-group list-group-flush">
+						<ul class="list-group list-group-flush">
 							
 							<?php for($i = 1; $i <= count($listas); $i++): ?> <!--En caso contrario, se muestra una lista con los recopilatorios-->
 
@@ -35,8 +35,11 @@
 									<span style="color: mediumvioletred;"> | </span> <!--Separador-->
 									<span>Incluye <span class="font-weight-bold"><?=$listas[$i - 1]->numero_canciones?></span><?=$listas[$i - 1]->numero_canciones == 1 ? " canción" : " canciones"?><span> <!--Número de canciones-->
 									<span style="color: mediumvioletred;"> | </span> <!--Separador-->
-									<span>Actualizado <?=Utilidades::tiempo_pasado($listas[$i - 1]->tiempo_pasado)?></span> <!--Tiempo desde la última inclusión-->
-									<a class="boton-lista badge badge-info"><span style="color: white;">Añádela</span></a> <!--Botón para añadir la canción-->
+									<span><?=$listas[$i - 1]->numero_canciones == 0 ? "Creado " : "Actualizado "?><?=Utilidades::tiempo_pasado($listas[$i - 1]->tiempo_pasado)?></span> <!--Tiempo desde la creación o última inclusión-->
+									<a class="agregar-cancion badge badge-info"><span style="color: white;">Añádela</span></a> <!--Botón para añadir la canción-->
+
+									<span class="oculto"><?=$listas[$i - 1]->id_lista_youtube?></span> <!--Etiquetas ocultas para el script de jQuery-->
+									<span class="oculto"><?=$listas[$i - 1]->id_cancion?></span>
 
 								</li>
 
