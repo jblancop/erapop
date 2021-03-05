@@ -1,4 +1,4 @@
-git<?php
+<?php
 
 	/* Script PHP que procesa la petición AJaX para la inserción de los datos personales (autor, estilo, formato y ciudades favoritos) del usuario */
 

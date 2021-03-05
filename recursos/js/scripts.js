@@ -9,34 +9,9 @@ $(function()
     setTimeout(function resto() //Otros 2,25 s después (4,5 en total)
     {
         $('.encabezado-inicio').fadeOut(1000); //Oculta tanto el título como el subtítulo
-
         $('.fotos').delay(1000).fadeIn(2000); //Y hace aparecer las fotos con 1 s de retraso
-    }, 4500);
-});
-
-/* Aplica estilos específicos -fijos- a las fotos del top 3 */
-
-$(function() //En función de su puesto en la clasificación, aplica unos estilos u otros para que cada foto se situe en su sitio
-{
-    $('[data-contador2="1"]').css('left', '30px'); //Puesto en la clasificación
-    $('[data-contador2="2"]').css('right', '50px');
-    $('[data-contador2="3"]').css('left', '30px');
-
-    $('[data-contador2="1"]').next().css('right', '40px'); //Estrella que contiene a la nota media
-    $('[data-contador2="2"]').next().css('left', '40px');
-    $('[data-contador2="3"]').next().css('right', '40px');
-
-    $('[data-contador2="1"]').next().next().css('right', '62.5px'); //Nota media
-    $('[data-contador2="2"]').next().next().css('left', '62.5px');
-    $('[data-contador2="3"]').next().next().css('right', '62.5px');
-
-    $('[data-contador2="1"]').parent().addClass('contenedor1'); //Contenedor de la foto
-    $('[data-contador2="2"]').parent().addClass('contenedor2');
-    $('[data-contador2="3"]').parent().addClass('contenedor3');
-
-    $('[data-contador2="3"]').prev().css('margin-bottom', '75px'); //Da espacio inferior a la tercera foto para que se vea la sombra color bronce
-    $('[data-contador2="3"]').next().next().next().css('margin-bottom', '75px');
-    $('[data-contador2="3"]').next().next().next().next().css('margin-bottom', '75px');
+    }, 
+    4500);
 });
 
 /* Aplica estilos específicos a las fotos del top 3 al pasar el ratón por encima de una de ellas */
@@ -45,69 +20,15 @@ $(function()
 {
     $('.contenedor-top3').mouseenter(function() //Al pasar el ratón por encima
     {
-        let $contador2 = $(this).find('.numero-top3').data('contador2'); //Identifica el puesto en la clasificación de la canción
-
-        if($contador2 == 1) //Si es la nº 1 le aplica unos estilos
-        {
-            $(this).find('.imagen-top3').addClass('sombra-oro');
-            $(this).find('.numero-top3').addClass('numero-oro');
-            $(this).find('.nota-top3').removeClass('oculto');
-            $(this).find('.estrella-top3').removeClass('oculto');
-            $(this).find('.ano-top3').css('color', 'mediumvioletred');
-        }
-        else if($contador2 == 2) //Si es la nº 2, otros
-        {
-            $(this).find('.imagen-top3').addClass('sombra-plata');
-            $(this).find('.numero-top3').addClass('numero-plata');
-            $(this).find('.nota-top3').removeClass('oculto');
-            $(this).find('.estrella-top3').removeClass('oculto');
-            $(this).find('.ano-top3').css('color', 'mediumvioletred');
-        }
-        else //Si es la nº 3 -no hay más-, otros
-        {
-            $(this).find('.imagen-top3').addClass('sombra-bronce');
-            $(this).find('.numero-top3').addClass('numero-bronce');
-            $(this).find('.nota-top3').removeClass('oculto');
-            $(this).find('.estrella-top3').removeClass('oculto');
-            $(this).find('.ano-top3').css('color', 'mediumvioletred');
-        }
-
-        $('.contenedor-top3').not(this).css({'filter': 'blur(15px)', 'transform': 'scale(0.85)'}); //A las otras dos fotos, las difumina
-        $(this).css({'transform': 'scale(1.25)', 'zIndex': '3'}); //Y a la elegida la agranda
+        $(this).css({'transform': 'scale(1.25)', 'zIndex': '3'}); //Agranda la foto elegida
+        $('.contenedor-top3').not(this).css({'filter': 'opacity(3.5%)', 'transform': 'scale(0.75)'}); //Transparenta las otras dos
         $(this).find('.numero-top3').addClass('shake-slow shake-constant'); //Y hace que vibre el número
     });
 
     $('.contenedor-top3').mouseleave(function() //Al retirar el ratón, revierte los cambios
     {
-        let $contador2 = $(this).find('.numero-top3').data('contador2');
-
-        if($contador2 == 1)
-        {
-            $(this).find('.imagen-top3').removeClass('sombra-oro');
-            $(this).find('.numero-top3').removeClass('numero-oro');
-            $(this).find('.nota-top3').addClass('oculto');
-            $(this).find('.estrella-top3').addClass('oculto');
-            $(this).find('.ano-top3').css('color', 'black');
-        } 
-        else if($contador2 == 2) 
-        {
-            $(this).find('.imagen-top3').removeClass('sombra-plata');
-            $(this).find('.numero-top3').removeClass('numero-plata');
-            $(this).find('.nota-top3').addClass('oculto');
-            $(this).find('.estrella-top3').addClass('oculto');
-            $(this).find('.ano-top3').css('color', 'black');
-        }
-        else
-        {
-            $(this).find('.imagen-top3').removeClass('sombra-bronce');
-            $(this).find('.numero-top3').removeClass('numero-bronce');
-            $(this).find('.nota-top3').addClass('oculto');
-            $(this).find('.estrella-top3').addClass('oculto');
-            $(this).find('.ano-top3').css('color', 'black');
-        } 
-
-        $('.contenedor-top3').not(this).css({'filter': 'blur(0px)', 'transform': 'scale(1)'});
         $(this).css({'transform': 'scale(1)', 'zIndex': ''});
+        $('.contenedor-top3').not(this).css({'filter': 'opacity(100%)', 'transform': 'scale(1)'});
         $(this).find('.numero-top3').removeClass('shake-slow shake-constant');      
     });
 });
@@ -1415,10 +1336,10 @@ $(function()
 
 $(function()
 {
-    $('.crear-lista').click(function() //Se activa al hacer clic en el botón de class="crear-lista"
+    $('.crear-lista-modal').click(function() //Se activa al hacer clic en el botón de class="crear-lista-modal"
     {
-        var nombre = $('.nombre-lista').val(); //Se recogen los valores de los campos del formulario
-        var descripcion = $('.descripcion').val();
+        var nombre = $('.nombre-lista-crear').val(); //Se recogen los valores de los campos del formulario
+        var descripcion = $('.descripcion-crear').val();
 
         if(nombre.length < 3 || descripcion.length < 3) //Da un aviso en caso de que se intente crear un recopilatorio sin nombre o descripción
         {
@@ -1456,12 +1377,135 @@ $(function()
 
 $(function()
 {
-    $('.agregar-cancion').click(function()
+    $('.agregar-cancion').click(function() //Al pulsar el botón para añadir canciones
     {
-        var idLista = $(this).next().text();
-        console.log(idLista);
-        var idCancion = $(this).next().next().text();
-        console.log(idCancion);
+        var idLista = $(this).siblings('.oculto').text(); //Captura los parámetros necesarios para insertar la canción en la BD
+        var idCancion = $(this).parent().parent().data('id-cancion');
+        var tituloCancion = $(this).parent().parent().data('titulo-cancion');
+
+        $.ajax( //Se hace una petición AJaX para insertar la canción en la lista
+        {
+            type: 'POST', 
+            url: '../ajax_insertar_cancion.php', 
+            data: {id_lista_youtube: idLista, id_cancion: idCancion},
+            success: function(respuesta)
+            {
+                if(respuesta == 1) swal('¡Genial!', `¡${tituloCancion} ya está en la lista!`, 'success', {button: false}); //Si se inserta con éxito 
+                else if(respuesta == 2) swal('Ups...', 'La canción ya está en la lista', 'warning', {button: false}); //Si se detecta que la canción ya estaba en esa lista
+                else if(respuesta == 3) swal('¡Ey!', 'Has llegado al límite de canciones... :)', 'warning', {button: false}); //Si se detecta que la canción ya estaba en esa lista
+                else swal('Ups...', 'Algo ha fallado; intenta añadir la canción más tarde...', 'error', {button: false}); //Si ocurre un error durante la inserción
+            },
+            error: function() //Si la llamada AJaX falla
+            {
+                swal('Ups...', 'Algo ha fallado; intenta añadir la canción más tarde...', 'error', {button: false});
+            }
+        });
+    });
+});
+
+/* Eliminación */
+
+$(function()
+{
+    $('.eliminar-lista').click(function() //Al pulsar el botón para eliminar la lista
+    {
+        var idLista = $(this).parent().parent().data('id-lista'); //Captura el id de la lista
+        var lista = $(this).parent().parent(); //Captura la lista en sí
+
+        swal //Modal para confirmar el borrado
+        ({
+            title: '¿Quieres borrar esta lista?',
+            text: 'Si estás seguro, adelante',
+            icon: 'warning',
+            dangerMode: true, //Resalta el botón para conservar la información
+            closeOnClickOutside: false, //No permite cerrar el modal haciendo clic fuera de él
+            buttons: 
+            {
+                cancel: 
+                {
+                    text: 'Realmente no',
+                    value: null, //Parámetro que determina si se produce o no el borrado
+                    visible: true,
+                    className: 'btn btn-outline-secondary',
+                    closeModal: true,
+                },
+                confirm: 
+                {
+                    text: 'Lo estoy',
+                    value: true, //Parámetro que determina si se produce o no el borrado
+                    visible: true,
+                    className: 'btn btn-danger',
+                    closeModal: true,
+                }
+            }
+        }).then(function(value)
+        {
+            if(value) //Si value es true, se hace la petición AJaX para eliminar la lista
+            {
+                $.ajax(
+                {
+                    type: 'POST', 
+                    url: '../ajax_eliminar_lista.php',
+                    data: {id_lista_youtube: idLista},
+                    success: function(respuesta)
+                    {
+                        if(respuesta == 0) swal('Ups...', 'No hemos podido eliminar tu lista; prueba otra vez dentro de un rato', 'error', {button: false}); //Si la modificación falla, devuelve un mensaje de error
+                        else if(respuesta == 1) //De lo contrario
+                        {
+                            swal('¡Fulminada!', 'Tu lista ya es historia... :)', 'success', {button: false}); //Devuelve un mensaje de éxito
+
+                            lista.addClass('oculto'); //Oculta la lista momentáneamente para que el usuario perciba que ha sido eliminada
+                        }
+                    },
+                    error: function()
+                    {
+                        swal('Ups...', 'Parece que hay algún error técnico; inténtalo de nuevo más tarde', 'error', {button: false});
+                    }
+                })
+            }
+        })
+    });
+});
+
+/* Edición */
+
+$(function()
+{
+    $('.editar-lista-modal').click(function() //Al pulsar el botón ¡Adelante! del modal
+    {
+        var idLista = $(this).parent().parent().parent().parent().data('id-lista-editar'); //Captura el id de la lista
+        var nombre = $(this).parent().siblings().find('.nombre-lista-editar').val(); //Captura la lista en sí
+        var descripcion = $(this).parent().siblings().find('.descripcion-editar').val();
+
+        if(nombre.length < 3 || descripcion.length < 3) //Da un aviso en caso de que se intente crear un recopilatorio sin nombre o descripción
+        {
+            swal("Ah, sí...", "Tanto el nombre como la descripción han de tener una longitud de al menos 3 caracteres", "warning", {button: false});
+
+            return false;
+        }
+        else
+        {
+            $.ajax( //Se hace una petición AJaX para modificar la lista
+            {
+                type: 'POST', 
+                url: '../ajax_modificar_lista.php', 
+                data: {id_lista_youtube: idLista, nombre_lista: nombre, descripcion: descripcion},
+                success: function(respuesta)
+                {
+                    if(respuesta == 1) //Si se efectúa la modificación con éxito, se refresca la página web
+                    {
+                        function perfil(){window.location = 'http://localhost/recopilatorios/php/web/mvc/usuarios/listas';}
+
+                        swal('¡Genial!', 'Tu lista vuelve a estar lista... ;P', 'success', {button: false}).then(setTimeout(perfil, 1500));
+                    } 
+                    else swal('Ups...', 'Algo ha fallado; intenta modificar tu recopilatorio más tarde...', 'error', {button: false});
+                },
+                error: function()
+                {
+                    swal('Ups...', 'Algo ha fallado; intenta modificar tu recopilatorio más tarde...', 'error', {button: false});
+                }
+            });
+        }
     });
 });
 

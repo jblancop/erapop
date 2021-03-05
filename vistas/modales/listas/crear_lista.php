@@ -1,6 +1,6 @@
 <!--Modal para la creación de recopilatorios personales-->
 
-<div id="modal-crear_lista" class="modal fade" role="dialog">
+<div id="modal-crear-lista" class="modal fade" role="dialog">
 	
 	<div class="modal-dialog modal-dialog-centered modal-sm">
 		
@@ -10,15 +10,15 @@
 
 			<div class="modal-body" style="padding-bottom: 0px;"> <!--Cuerpo-->
 				
-				<input class="form-control mb-2 nombre-lista" type="text" minlength="3" maxlength="25" name="nombre-lista" placeholder="Ponle un nombre" required/>
+				<input class="form-control mb-2 nombre-lista-crear" type="text" minlength="3" maxlength="25" name="nombre-lista" placeholder="Ponle un nombre" required/>
 
-				<textarea class="form-control descripcion" name="descripcion" placeholder="¿De qué va tu nueva lista?" maxlength="200" rows="3" cols="67.5"></textarea>
+				<textarea class="form-control descripcion-crear" name="descripcion" placeholder="¿De qué va tu nueva lista?" maxlength="200" rows="3" cols="67.5"></textarea>
 
 			</div>
 
 			<div class="modal-footer"> <!--Pie-->
 
-				<button class="btn btn-info crear-lista" type="submit">¡Adelante!</button>
+				<button class="btn btn-info crear-lista-modal" type="submit">¡Adelante!</button>
 
 			</div>
 

@@ -121,6 +121,28 @@
 
 			return $tiempo_formateado;
 		}
+
+		/* Prepara los vídeos de YouTube para que se puedan visualizar embebidos */
+
+		static function embeber($enlace_youtube)
+		{
+			$inicio = strpos($enlace_youtube, "watch?v=");
+
+			$enlace_youtube = substr_replace($enlace_youtube, "embed/", $inicio, 8);
+
+			return $enlace_youtube;
+		}
+
+		/* Extrae el id numérico de cada vídeo */
+
+		static function id_video($enlace_youtube)
+		{
+			$inicio = strpos($enlace_youtube, "=");
+
+			$id_youtube = substr($enlace_youtube, $inicio + 1);
+
+			return $id_youtube;
+		}
 	}
 
 ?>

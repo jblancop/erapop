@@ -1,6 +1,6 @@
 <!--Modal para mostrar las listas personales del usuario y acceder a ellas-->
 
-<div id="modal-agregar-canciones" class="modal fade" role="dialog">
+<div id="modal-agregar-canciones-<?=$id_cancion?>" class="modal fade" role="dialog">
 
 	<?php if($numero_listas == 0): ?> <!--En caso de que el usuario aún no haya hecho ninguna lista, el modal es de tamaño normal-->
 
@@ -24,22 +24,29 @@
 
 					<?php else: ?>
 
-						<ul class="list-group list-group-flush">
+						<ul class="list-group list-group-flush" data-id-cancion="<?=$id_cancion?>" data-titulo-cancion="<?=$titulo_cancion?>">
 							
 							<?php for($i = 1; $i <= count($listas); $i++): ?> <!--En caso contrario, se muestra una lista con los recopilatorios-->
 
 								<li class="list-group-item">
 
+									<span class="oculto"><?=$listas[$i - 1]->id_lista_youtube?></span> <!--Etiqueta oculta para el script de jQuery-->
 									<span class="vinetas"><?=$i?>) </span> <!--Contador-->
-									<span class="font-italic"><?=$listas[$i - 1]->nombre_lista?> </span> <!--Título del recopilatorio-->
+									<span class="nombre-lista font-italic"><?=$listas[$i - 1]->nombre_lista?></span> <!--Título del recopilatorio-->
 									<span style="color: mediumvioletred;"> | </span> <!--Separador-->
-									<span>Incluye <span class="font-weight-bold"><?=$listas[$i - 1]->numero_canciones?></span><?=$listas[$i - 1]->numero_canciones == 1 ? " canción" : " canciones"?><span> <!--Número de canciones-->
+									<span>Incluye <span class="numero-canciones font-weight-bold"><?=$listas[$i - 1]->numero_canciones?></span><?=$listas[$i - 1]->numero_canciones == 1 ? " canción" : " canciones"?></span> <!--Número de canciones-->
 									<span style="color: mediumvioletred;"> | </span> <!--Separador-->
 									<span><?=$listas[$i - 1]->numero_canciones == 0 ? "Creado " : "Actualizado "?><?=Utilidades::tiempo_pasado($listas[$i - 1]->tiempo_pasado)?></span> <!--Tiempo desde la creación o última inclusión-->
-									<a class="agregar-cancion badge badge-info"><span style="color: white;">Añádela</span></a> <!--Botón para añadir la canción-->
 
-									<span class="oculto"><?=$listas[$i - 1]->id_lista_youtube?></span> <!--Etiquetas ocultas para el script de jQuery-->
-									<span class="oculto"><?=$listas[$i - 1]->id_cancion?></span>
+									<?php if($listas[$i - 1]->numero_canciones < 15): ?> <!--Si no se ha llegado al límite de 15 canciones-->
+
+										<a class="agregar-cancion badge badge-info"><span style="color: white;">Añádela</span></a> <!--Botón para añadir la canción-->
+
+									<?php else: ?>
+
+										<span class="a-tope badge badge-danger"><span style="color: white;">¡A tope!</span></span> <!--Advertencia de que se ha llegado al máximo-->
+
+									<?php endif; ?>
 
 								</li>
 

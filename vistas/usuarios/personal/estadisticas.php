@@ -18,7 +18,7 @@
 
 						<canvas id="histograma" class="animsition"></canvas> <!--Gráfico de barras con las votaciones-->
 
-						<?php require_once("recursos/jquery/histograma.php"); ?>
+						<?php require_once("recursos/js/histograma.php"); ?>
 
 						<?php if($ano): ?> <!--Información de las votaciones por año-->
 

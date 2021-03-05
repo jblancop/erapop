@@ -65,7 +65,7 @@ body {
 	max-width: 576px;
 } /*Evita el problema de funcionamiento del truncado de textos*/
 
-.portada:hover, .boton-subestilo:hover {
+.portada:hover, .boton-subestilo:hover, .eliminar-lista:hover, .editar-lista:hover, .publicar-lista:hover, .boton-youtube:hover {
 	cursor: pointer;
 }
 
@@ -76,6 +76,11 @@ body {
 .h100vh {
 	height: 100vh;
 } /*Hace que una caja ocupe el 100 % de la altura de pantalla*/
+
+.limpiar-flotados {
+    float: none;
+    clear: both;
+}
 
 
 /* BOTONES Y ENLACES */
@@ -141,6 +146,7 @@ body {
 	color: var(--color3);
 } /*Enlace para desplazarse entre el principio y el final de la página de recopilatorios*/
 
+
 /* MODALES */
 
 .modal-header {
@@ -205,37 +211,63 @@ body {
     display: inline-block;
     text-align: right;
     transition: all 1s ease;
-} /*Contenedor de las fotos*/
+}
+/*.contenedor-top3:hover {
+	transform: scale(1.25); 
+	z-index: 3 !important;
+}*/
+.contenedor-top3:hover .nota-top3, .contenedor-top3:hover .estrella-top3 {
+	display: unset;
+}
+.contenedor-top3:hover .texto-top3 > .ano-top3 {
+	color: mediumvioletred;
+} /*Cualquier contenedor*/
 
-.contenedor1 {
+#contenedor-top3-1 {
 	margin-top: 75px;
 	z-index: 2;
 }
-.contenedor2 {
+#contenedor-top3-1:hover img {
+	box-shadow: 0 0 25px 20px #ffff9e;
+}
+#contenedor-top3-1:hover .numero-top3 {
+	color: gold;
+	text-shadow: 5px 5px 14px yellow;
+} /*Contenedor 1*/
+
+#contenedor-top3-2 {
 	top: 300px;
 	left: 530px;
 	z-index: 1;
 }
-.contenedor3 {
-	top: 610px;
-	left: 140px;
-} /* Clases aplicadas por el script de jQuery a cada una de las fotos del top 3*/
-
-.sombra-oro {
-	box-shadow: 0 0 25px 20px #ffff9e;
-}
-.sombra-plata {
+#contenedor-top3-2:hover img {
 	box-shadow: 0 0 25px 20px grey;
 }
-.sombra-bronce {
+#contenedor-top3-2:hover .numero-top3 {
+    color: silver;
+	text-shadow: 5px 5px 4px gainsboro;
+} /*Contenedor 2*/
+
+#contenedor-top3-3 {
+	top: 610px;
+	left: 140px;
+}
+#contenedor-top3-3:hover img {
 	box-shadow: 0 0 25px 20px bisque;
-} /*Sombras aplicadas por el script de jQuery a los contenedores de las fotos*/
+}
+#contenedor-top3-3:hover .numero-top3 {
+    color: #CD7F32;
+	text-shadow: 5px 5px 4px bisque;
+} /*Contenedor 3*/
 
 .imagen-top3 {
 	height: 400px;
 	width: 600px;
 	border-radius: 20px;
 	transition: all 1s ease;
+}
+#imagen-top3-3 {
+	margin-bottom: 75px;
 }
 
 .numero-top3 {
@@ -247,32 +279,38 @@ body {
 	font-family: 'Rock Salt', cursive;
 	text-shadow: 5px 5px 4px var(--color1);
 	transition: all 0.25s ease;
+} 
+#numero-top3-1, #numero-top3-3 {
+	left: 30px;
+}
+#numero-top3-2 {
+	right: 50px;
 } /*Puesto en la clasificación*/
-
-.numero-oro {
-	color: gold;
-	text-shadow: 5px 5px 14px yellow;
-}
-.numero-plata {
-    color: silver;
-	text-shadow: 5px 5px 4px gainsboro;
-}
-.numero-bronce {
-    color: #CD7F32;
-	text-shadow: 5px 5px 4px bisque;
-} /*Estilos aplicados a los números de la clasificación por el script de jQuery*/
 
 .estrella-top3 {
 	position: absolute;
     top: 10px;
     color: #f0ad4e;
     font-size: 4em;
+} 
+#estrella-top3-1, #estrella-top3-3 {
+	right: 40px;
+}
+#estrella-top3-2 {
+	left: 40px;
 } /*Estrella que sirve de fondo a la nota media*/
+
 .nota-top3 {
 	position: absolute;
 	top: 53px;
 	color: sienna;
 	font-weight: bold;
+}
+#nota-top3-1, #nota-top3-3 {
+	right: 62.5px;
+}
+#nota-top3-2 {
+	left: 62.5px;
 } /*Nota media en sí*/
 
 .referencia-top3 {
@@ -289,6 +327,9 @@ body {
 }
 .referencia-top3 a:hover {
 	color: var(--color1);
+} 
+#referencia-top3-3 {
+	margin-bottom: 75px;
 } /*Enlace que redirige a la web de la que se ha tomado la fotografía*/
 
 .texto-top3 {
@@ -301,6 +342,9 @@ body {
     padding: 5px;
     max-width: 87.5%;
     transition: all 1s ease;
+}
+#texto-top3-3 {
+	margin-bottom: 75px;
 }
 
 .cancion-top3 {
@@ -564,21 +608,21 @@ form small, #form-alta-usuario small {
 } /*Imagen del mundo que acompaña a la localización de la banda*/
 
 .boton-recopilame {
+	font-family: 'Shadows Into Light', cursive;
 	color: var(--color1);
 	border: 1px solid;
-	border-radius: 2.5px;
+	border-radius: 5px;
 	border-color: var(--color1);
-	height: 24px;
-	padding: 0px 5px 25px 5px;
+	padding: 1.5px 7.5px 1.5px 7.5px;
+	font-size: 1.2em;
 	transition: all 0.5s ease;
 }
 .boton-recopilame:hover {
 	color: white;
-	border-radius: 2.5px;
+	font-weight: bold;
+	border-radius: 5px;
 	background-color: var(--color2);
 	border-color: var(--color2);
-	height: 24px;
-	padding-top: 0px;
 	cursor: pointer;
 	box-shadow: 0 0 2.5px 2.5px var(--color1);
 	animation: parpadeo 1s infinite linear;
@@ -610,6 +654,12 @@ form small, #form-alta-usuario small {
 	float: right;
 	margin-top: 3px;
 }
+
+.a-tope {
+	float: right;
+	margin-top: 3px;
+} /* Falso botón que avisa de que se ha llegado al límite de 15 canciones*/
+
 
 /* COMENTARIOS */
 
@@ -711,4 +761,54 @@ form small, #form-alta-usuario small {
 .tachado {
     text-decoration: line-through;
     color: var(--color1);
+}
+
+
+/* LISTAS PERSONALES */
+
+.listas {
+	width: 97.5%; 
+	margin: 0px auto;
+}
+
+.lista-15 {
+	box-shadow: 0 0 25px 10px lightcoral;
+}
+
+.lista-individual, .caja-crear-lista {
+	border-radius: 20px;
+	padding: 0px 20px 0px 20px;
+	margin: 0px 0.166% 0px 0.166%;
+	max-width: 33%; 
+	float: left;
+}
+
+.lista-individual {
+	background-color: mistyrose;
+}
+
+.caja-crear-lista {
+	background-color: rgb(255, 228, 225, 0.25);
+}
+
+.cancion-lista {
+	margin: 0px auto;
+	width: 97.5%;
+	background-color: seashell;
+	border-radius: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+.cancion-autor-ano {
+	margin-top: 8px;
+	max-width: 80%;
+}
+
+.boton-youtube { 
+	width: 40px; 
+	margin-top: 1.5px;
 }

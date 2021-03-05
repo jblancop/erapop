@@ -110,8 +110,62 @@
 			}  
 			else //De lo contrario, presenta el panel de gestión de los recopilatorios
 			{
-				
+				require_once("vistas/usuarios/listas/encabezado.php");
+
+				$resultados = $listas->listar("listas_youtube", NULL, "WHERE id_usuario = $id_usuario", "id_lista_youtube"); //Se determina qué listas ha creado el usuario
+
+				while($filas[] = $resultados->fetch_object()); //Volcado de la información en el array para no depender de la llamada a la BD
+
+				array_pop($filas); //Por alguna razón se crea una fila adicional vacía que hay que eliminar
+
+				$n = sizeof($filas);
+
+				if($n < 3) $filas[$n] = array(); //Si hay menos de tres listas, crea un array vacío al final de $listas
+
+				foreach($filas as $clave => $valor) //Bucle externo con las listas (1-3)
+				{
+					if($clave == $n) //Si el bucle llega a ese array vacío, presenta una caja especial para crear un nuevo recopilatorio
+					{
+						require_once("vistas/usuarios/listas/crear_lista.php");
+						require_once("vistas/modales/listas/crear_lista.php");
+					}
+					else //Mientras tanto, pinta los recopilatorios 
+					{
+						$id_lista = $valor->id_lista_youtube; //Parámetros obtenidos de $listas->listar
+						$nombre_lista = $valor->nombre_lista; 
+						$descripcion = $valor->descripcion;
+
+						$listas->establecer("id_lista_youtube", $id_lista);
+
+						$resultado = $listas->contar_canciones();
+
+						while($fila = $resultado->fetch_object()) $numero_canciones = $fila->numero_canciones;
+
+						require("vistas/usuarios/listas/inicio_lista.php");
+
+						$resultados = $listas->listar_todo();
+
+						while($filas2 = $resultados->fetch_object()) //Bucle interno con las canciones (1-15) de cada lista
+						{
+							$orden = $filas2->orden; //Parámetros obtenidos de $listas->listar_todo
+							$titulo_cancion = $filas2->titulo_cancion;
+							$nombre_autor = Utilidades::reordenar($filas2->nombre_autor);
+							$ano = $filas2->ano;
+							$id_youtube = Utilidades::id_video($filas2->enlace_youtube);
+
+							$recopilatorio = $ano; //El value del botón que lleva a cada año se llama $recopilatorio
+
+							require("vistas/usuarios/listas/canciones.php");
+						}
+
+						require("vistas/usuarios/listas/fin_lista.php");
+					}
+				}
+
+				require("vistas/usuarios/listas/pie.php");
 			}
+
+			unset($listas); //Eliminación del objeto para descargar espacio en memoria
 		}
 
 		/* Gestión de la página personal */
@@ -353,6 +407,11 @@
 				}
 			}
 			else require_once("vistas/usuarios/registro.php"); //Si no hay envío POST, visualiza el formulario de registro 
+		}
+
+		function logo()
+		{
+			require_once("vistas/logo.html");
 		}
 	}
 

@@ -16,7 +16,7 @@
 
 					<h4 class="font-italic text-center">¿A qué esperas? ¡Haz clic ya! <span style="color: mediumvioletred">;)</span></h4>
 
-					<div class="d-flex justify-content-center"><button class="btn btn-info mt-2" data-toggle="modal" data-target="#modal-crear_lista" type="submit">¡A recopilar!</button></div>
+					<div class="d-flex justify-content-center"><button class="btn btn-info mt-2" data-toggle="modal" data-target="#modal-crear-lista" type="submit">¡A recopilar!</button></div>
 
 					<div class="form-group form-inline justify-content-center mt-5"> <!--Botonera-->
 

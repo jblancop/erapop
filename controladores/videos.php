@@ -48,7 +48,7 @@
 
 					while($fila3 = $resultados->fetch_object()) array_push($datos_listas, $fila3); //Se incluyen las listas en el array
 					
-					foreach($datos_listas as $clave4 => $fila4)	$fila4->id_cancion = $fila->id_cancion; //Se incluye id_cancion en cada lista para facilitar su acceso con jQuery
+					//foreach($datos_listas as $clave4 => $fila4)	$fila4->id_cancion = $fila->id_cancion; //Se incluye id_cancion en cada lista para facilitar su acceso con jQuery
 
 					$fila->listas = $datos_listas; //Se añade el array de listas como atributo de cada $fila del array $canciones
 				} 
@@ -84,7 +84,7 @@
 	{
 		$ano = $fila->ano; //Parámetros obtenidos mediante $videos->listar_todo()
 		$enlace_rym = $fila->enlace_rym;
-		$enlace_youtube = $fila->enlace_youtube;
+		$enlace_youtube = Utilidades::embeber($fila->enlace_youtube);
 		$id_autor = $fila->id_autor;
 		$id_cancion = $fila->id_cancion;
 		$nombre_autor = Utilidades::reordenar($fila->nombre_autor);
@@ -108,9 +108,6 @@
 		$coletilla = Utilidades::coletilla($votos_web); //Parámetros derivados de transformaciones de los originales de la BD
 		$decada = Utilidades::decada($ano);
 		$nombre_foto = Utilidades::recortar($titulo_disco);
-
-		$inicio = strpos($enlace_youtube, "watch?v="); //Prepara los vídeos de YouTube para que se puedan visualizar embebidos
-		$enlace_youtube = substr_replace($enlace_youtube, "embed/", $inicio, 8);
 
 		if($condicion == true) $ano_disco = '('.$ano.')'; //Permite incluir el año al lado del título del disco en la página sobre las décadas
 		else $ano_disco = null;
